@@ -19,4 +19,3 @@ enter the virtual environment and install necessary Python dependencies.
 $ source virtualenv/bin/activate
 $ pip install -r requirements.txt
 ```
->>>>>>> Document virtualenv creation
