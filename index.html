@@ -1,0 +1,32 @@
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>CoffeeVis</title>
+  <script src="./lib/d3.js"></script>
+  <script src="./js/coffee.js"></script>
+  <link href="./css/main.css" rel="stylesheet">
+</head>
+<body onload="init()"> <!-- init() method defined in coffee.js-->
+
+<div style="margin:30;">
+  <div style="display: table-cell; width: 120;">
+    <label for="xdropdown">X: </label><select id="xdropdown">
+      <option val="region">region</option>
+      <option val="category">category</option>
+    </select>
+  </div>
+  <div style="display: table-cell; width: 150;">
+    <label for="ydropdown">Y: </label><select id="ydropdown">
+      <option val="sales">sales</option>
+      <option val="profit">profit</option>
+    </select>
+  </div>
+  <div style="display: table-cell; width: 150;">
+    <button id="update" onclick="updateClicked()">Update</button>
+  </div>
+</div>
+
+<div id="vis"></div>
+
+</body>
+</html>
