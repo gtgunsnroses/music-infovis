@@ -22,3 +22,9 @@ body {
 	width: 50%;
 	padding: 10px;
 }
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}
