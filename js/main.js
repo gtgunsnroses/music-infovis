@@ -39,8 +39,6 @@
           .attr('class', 'y-axis')
           .attr('transform', 'translate(' + width + ', 0)')
         ;
-
-        d3.csv('data/everything.csv', update);
     }
 
     function update(pairs) {
