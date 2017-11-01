@@ -39,8 +39,8 @@
             return gettingTable.then(averagePopularityByYear);
         };
 
-        this.trackesOfYear = function () {
-            return gettingTable.then(trackesOfYear);
+        this.tracksOfYear = function () {
+            return gettingTable.then(tracksOfYear);
         };
     };
 
@@ -81,7 +81,7 @@
      *
      * @return {Array}
      */
-    function trackesOfYear(table, year) {
+    function tracksOfYear(table, year) {
         return table.filter(function (row) { return String(row.year) === String(year); });
     }
 
