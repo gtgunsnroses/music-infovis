@@ -1,5 +1,7 @@
-(function (d3, window) {
+(function (d3, w) {
     'use strict';
+
+    var repo = w.repository('data/everything.csv');
 
     var chart;
     var vis;
@@ -12,6 +14,9 @@
     // Sets the ranges.
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
+
+    init();
+    repo.averagePopularityByYear().then(update);
 
     function init() {
         chart = d3.select('#overview').append('svg');
@@ -34,39 +39,9 @@
           .attr('class', 'y-axis')
           .attr('transform', 'translate(' + width + ', 0)')
         ;
-
-        d3.csv('data/everything.csv', update);
     }
 
-    function update(data) {
-        var pairs = data.reduce(groupBy.bind(null, 'year', 'popularity'), []);
-
-        pairs = pairs.map(function (pair) {
-            var sum = 0;
-            var n = 0;
-
-            for (var i in pair.values) {
-                var value = pair.values[i];
-
-                if (value === '') {
-                    continue;
-                }
-
-                sum += +pair.values[i];
-                n++;
-            }
-
-            return {year: pair.x, popularity: sum / n}
-        });
-
-        pairs = pairs.filter(function (pair) {
-            if (pair.year) {
-                return true;
-            }
-
-            return false;
-        });
-
+    function update(pairs) {
         // Scale the range of the data
         x.domain(d3.extent(pairs, function(d) { return d.year; }));
         y.domain([
@@ -98,23 +73,6 @@
           .call(d3.axisRight(y).ticks(5))
         ;
     }
-
-    // Adds a row to groups based on x and y attributes.
-    function groupBy(x, y, groups, row) {
-        for (var i in groups) {
-          if (groups[i].x === row[x]) {
-            groups[i].values.push(row[y]);
-
-            return groups;
-          }
-        }
-
-        groups.push({x: row[x], values: []});
-
-        return groups;
-    }
-
-    init();
 
     return;
 
