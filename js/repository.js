@@ -82,7 +82,10 @@
      * @return {Array}
      */
     function tracksOfYear(year, table) {
-        return table.filter(function (row) { return String(row.year) === String(year); });
+        return table
+            .filter(function (row) { return String(row.year) === String(year); })
+            .filter(function (row) { return row.popularity !== ''; })
+        ;
     }
 
     function sum(a, b) { return a + b; }

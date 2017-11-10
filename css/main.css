@@ -2,6 +2,7 @@ body {
 	display: block;
 	margin: 0;
 	height: 100%;
+    background-color: #433F5F;
 }
 
 .axis path,
