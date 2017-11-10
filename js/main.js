@@ -2,75 +2,70 @@
     'use strict';
 
     var repo = w.repository('data/everything.csv');
+    var overview = createOverview(500, 300);
 
-    var chart;
-    var vis;
+    repo.averagePopularityByYear().then(p(updateOverview, overview));
 
-    // Dimensions of the chart.
-    var margin = {top: 20, right: 50, bottom: 30, left: 20};
-    var width = 500 - margin.left - margin.right;
-    var height = 300 - margin.top - margin.bottom;
+    function createOverview(width, height) {
+        // Dimensions of the chart.
+        var margin = {top: 20, right: 50, bottom: 30, left: 20};
+        width -= (margin.left + margin.right);
+        height -= (margin.top + margin.bottom);
 
-    // Sets the ranges.
-    var x = d3.scaleLinear().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
+        var svg = d3.select('#overview').append('svg')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        ;
 
-    init();
-    repo.averagePopularityByYear().then(update);
-
-    function init() {
-        chart = d3.select('#overview').append('svg');
-        vis = chart
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-          .attr('class', 'grid')
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        var grid = svg
+            .append("g")
+            .attr('class', 'grid')
         ;
 
         // Adds the x-axis
-        vis.append("g")
-          .attr('class', 'x-axis')
-          .attr('transform', 'translate(0,' + height + ')')
+        grid.append("g")
+            .attr('class', 'x-axis')
+            .attr('transform', 'translate(0,' + height + ')')
         ;
 
         // Adds the y-axis.
-        vis.append("g")
-          .attr('class', 'y-axis')
-          .attr('transform', 'translate(' + width + ', 0)')
+        grid.append("g")
+            .attr('class', 'y-axis')
+            .attr('transform', 'translate(' + width + ', 0)')
         ;
+
+        return {
+            svg: svg,
+            x: d3.scaleLinear().range([0, width]),
+            y: d3.scaleLinear().range([height, 0])
+        };
     }
 
-    function update(pairs) {
+    function updateOverview(chart, pairs) {
         // Scale the range of the data
-        x.domain(d3.extent(pairs, function(d) { return d.year; }));
-        y.domain([
+        chart.x.domain(d3.extent(pairs, function(d) { return d.year; }));
+        chart.y.domain([
             d3.min(pairs, function(d) { return d.popularity - 2; }),
             d3.max(pairs, function(d) { return d.popularity + 2; })
         ]);
 
         // define the line
         var valueLine = d3.line()
-            .x(function(d) { return x(d.year); })
-            .y(function(d) { return y(d.popularity); })
+            .x(function(d) { return chart.x(d.year); })
+            .y(function(d) { return chart.y(d.popularity); })
         ;
 
-        vis
-            .append('path')
-            .datum(pairs)
-            .attr('class', 'line')
-            .attr('d', valueLine)
+        chart
+          .svg
+          .selectAll('.grid')
+          .append('path')
+          .datum(pairs)
+          .attr('class', 'line')
+          .attr('d', valueLine)
         ;
 
-        // Update the x-axis.
-        chart.selectAll('.x-axis')
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x))
-        ;
-
-        // Update the y-axis.
-        chart.selectAll('.y-axis')
-          .call(d3.axisRight(y).ticks(5))
-        ;
+        // Update x-axis and y-axis.
+        chart.svg.selectAll('.x-axis').call(d3.axisBottom(chart.x));
+        chart.svg.selectAll('.y-axis').call(d3.axisRight(chart.y).ticks(5));
     }
 })(d3, window);
