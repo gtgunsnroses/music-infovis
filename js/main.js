@@ -116,7 +116,6 @@
         var cx = 0.5 * width;
         var cy = 0.5 * height;
 
-        // var circles = tracks.map(p(createCircle));
         container
             .append('g')
             .attr('class', 'outer')
@@ -126,7 +125,6 @@
             .append('circle')
             .attr('class', 'circle')
             .attr('r', function (track) { return Math.pow(track.energy, 3) * 20; })
-            // angle(da, ds, i)
             .attr('cx', function (d, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); })
             .attr('cy', function (d, i) { return cy + 0.4 * width * Math.sin(angle(da, ds, i) - 0.5 * Math.PI); })
         ;
@@ -181,15 +179,13 @@
     function createArc(da, ds, r, track, i) {
         var s = 0;
         var a = i * da;
-        var m = 0.2; // @todo can we flip this?
+        var w = 0.2;
 
         var arc = d3.arc()
             .innerRadius(0.1 * r + 0.8 * r * (1 - 0.01 * track.popularity))
             .outerRadius(r)
-            // .startAngle(a + da * m + s + 0.5 * ds)
-            // .endAngle(a + da * (1 - m) + s + 0.5 * ds)
-            .startAngle(angle(da, ds, i) - da * m)
-            .endAngle(angle(da, ds, i) + da * m)
+            .startAngle(angle(da, ds, i) - 0.5 * w * da)
+            .endAngle(angle(da, ds, i) + 0.5 * w * da)
         ;
 
         return {track: track, arc: arc};
