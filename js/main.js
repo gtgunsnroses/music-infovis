@@ -138,34 +138,36 @@
         var cx = 0.5 * width;
         var cy = 0.5 * height;
 
-        var items = container.selectAll('.detail-item').data(tracks);
-        items.exit().remove();
-
-        var itemNew = items
-            .enter()
-            .append('g')
-            .attr('class', 'detail-item')
-        ;
-
         var rFn = function (track) { return Math.pow(track.energy, 2) * 20; };
         var xFn = function (track, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); };
         var yFn = function (track, i) { return cy + 0.4 * width * Math.sin(angle(da, ds, i) - 0.5 * Math.PI); };
 
-        items
+        var itemsOld = container.selectAll('.detail-item').data(tracks);
+        var itemsDel = itemsOld.exit();
+        var itemsNew = itemsOld.enter();
+
+        itemsNew = itemsNew.append('g').attr('class', 'detail-item');
+        itemsNew.append('circle').attr('class', 'circle');
+        itemsNew.append('path').attr('class', 'popularity');
+        itemsNew.append('text').append('textPath').attr('class', 'rank').attr('xlink:href', '#rank-path');
+
+        var itemsAll = itemsOld.merge(itemsNew);
+
+        itemsAll
             .select('.circle')
             .attr('r', rFn)
             .attr('cx', xFn)
             .attr('cy', yFn)
         ;
 
-        items
+        itemsAll
             .select('.popularity')
             .attr('d', p(createArc, da, ds, 0.34 * width))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
         ;
 
-        items
+        itemsAll
             .select('.rank')
             .attr('startOffset', function (track, i) {
                 return (100 * angle(da, 0, i) / (2 * Math.PI - ds)) + '%';
@@ -173,32 +175,7 @@
             .text(function (track) { return track.rank; })
         ;
 
-        itemNew
-            .append('circle')
-            .attr('class', 'circle')
-            .attr('r', rFn)
-            .attr('cx', xFn)
-            .attr('cy', yFn)
-        ;
-
-        itemNew
-            .append('path')
-            .attr('class', 'popularity')
-            .attr('d', p(createArc, da, ds, 0.34 * width))
-            .attr('fill', p(color))
-            .attr('transform', translate(cx, cy))
-        ;
-
-        itemNew
-            .append('text')
-            .append('textPath')
-            .attr('class', 'rank')
-            .attr('xlink:href', '#rank-path')
-            .attr('startOffset', function (track, i) {
-                return (100 * angle(da, 0, i) / (2 * Math.PI - ds)) + '%';
-            })
-            .text(function (track) { return track.rank; })
-        ;
+        itemsDel.remove();
     }
 
     function createArc(da, ds, r, track, i) {
