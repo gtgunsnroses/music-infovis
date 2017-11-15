@@ -3,7 +3,7 @@
 
     var repo = w.repository('data/everything.csv');
     var overview = createOverview(500, 300);
-    var detail = createDetail(750, 750);
+    var detail = createDetail(1000, 1000);
 
     repo.averagePopularityByYear().then(p(updateOverview, overview));
     repo.tracksOfYear(2000).then(p(updateDetail, detail));
@@ -77,19 +77,29 @@
     }
 
     function createDetail(width, height) {
-        // Dimensions of the chart.
-        var margin = {top: 20, right: 50, bottom: 30, left: 20};
-        width -= (margin.left + margin.right);
-        height -= (margin.top + margin.bottom);
-
         var svg = d3.select('#detail').append('svg')
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("width", width)
+            .attr("height", height)
         ;
 
         svg
             .append('g')
             .attr('class', 'detail-container')
+        ;
+        var path = d3.path();
+        path.arc(
+            0.5 * width,
+            0.5 * height,
+            0.35 * width,
+            (10 / 180) * Math.PI - 0.5 * Math.PI,
+            (350 / 180) * Math.PI - 0.5 * Math.PI
+        );
+
+        svg
+            .append('path')
+            .attr('id', 'rank-path')
+            .attr('class', 'rank-path')
+            .attr('d', path.toString())
         ;
 
         return {
@@ -97,8 +107,24 @@
         };
     }
 
-    function l(a, b, t) {
-        return (1 - t) * a + t * b;
+    function translate(x, y) {
+        return 'translate(' + x + ', ' + y + ')';
+    }
+
+    function color(track) {
+        // Linear interpolation between 2 values.
+        var l = function l(a, b, t) { return (1 - t) * a + t * b; };
+
+        var h = [85, 230, 230]; // Happy
+        var n = [255, 255, 255]; // Neutral
+        var s = [251, 96, 160]; // Sad
+
+        var t = track.valence;
+        var r = t < 0.5 ? l(s[0], n[0], t / 0.5) : l(n[0], h[0], (t - 0.5) / 0.5);
+        var g = t < 0.5 ? l(s[1], n[1], t / 0.5) : l(n[1], h[1], (t - 0.5) / 0.5);
+        var b = t < 0.5 ? l(s[2], n[2], t / 0.5) : l(n[2], h[2], (t - 0.5) / 0.5);
+
+        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
     }
 
     function updateDetail(chart, tracks) {
@@ -107,73 +133,72 @@
         var width = parseInt(chart.svg.style('width'), 10);
         var height = parseInt(chart.svg.style('height'), 10);
 
-        var arcs = tracks.map(p(createArc, da, ds, 0.3 * width));
-
         var container = chart.svg.select('.detail-container');
-        container.selectAll('g').remove();
-        container.selectAll('path').remove();
 
         var cx = 0.5 * width;
         var cy = 0.5 * height;
 
-        container
-            .append('g')
-            .attr('class', 'outer')
-            .selectAll('.circle')
-            .data(tracks)
+        var items = container.selectAll('.detail-item').data(tracks);
+        items.exit().remove();
+
+        var itemNew = items
             .enter()
-            .append('circle')
-            .attr('class', 'circle')
-            .attr('r', function (track) { return Math.pow(track.energy, 3) * 20; })
-            .attr('cx', function (d, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); })
-            .attr('cy', function (d, i) { return cy + 0.4 * width * Math.sin(angle(da, ds, i) - 0.5 * Math.PI); })
+            .append('g')
+            .attr('class', 'detail-item')
         ;
 
-        console.log(tracks[0]);
+        var rFn = function (track) { return Math.pow(track.energy, 2) * 20; };
+        var xFn = function (track, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); };
+        var yFn = function (track, i) { return cy + 0.4 * width * Math.sin(angle(da, ds, i) - 0.5 * Math.PI); };
 
-        var h = [85, 230, 230];
-        var n = [255, 255, 255];
-        var s = [251, 96, 160];
+        items
+            .select('.circle')
+            .attr('r', rFn)
+            .attr('cx', xFn)
+            .attr('cy', yFn)
+        ;
 
-        var arcContainer = container.append('g');
-        arcContainer.attr('class', 'arc-container');
-        arcs.forEach(function (arc) {
+        items
+            .select('.popularity')
+            .attr('d', p(createArc, da, ds, 0.34 * width))
+            .attr('transform', translate(cx, cy))
+            .attr('fill', p(color))
+        ;
 
-            var t = arc.track.valence;
-            var fill = [
-                t < 0.5 ? l(s[0], n[0], t / 0.5) : l(n[0], h[0], (t - 0.5) / 0.5),
-                t < 0.5 ? l(s[1], n[1], t / 0.5) : l(n[1], h[1], (t - 0.5) / 0.5),
-                t < 0.5 ? l(s[2], n[2], t / 0.5) : l(n[2], h[2], (t - 0.5) / 0.5),
-            ];
+        items
+            .select('.rank')
+            .attr('startOffset', function (track, i) {
+                return (100 * angle(da, 0, i) / (2 * Math.PI - ds)) + '%';
+            })
+            .text(function (track) { return track.rank; })
+        ;
 
-            arcContainer
-                .append('path')
-                .style("fill", 'rgb(' + fill[0] + ', ' + fill[1] + ', ' + fill[2] + ')')
-                .attr('d', arc.arc)
-                .attr('id', 'arc-' + arc.track.rank)
-                .attr('transform', 'translate(' + cx + ',' + cy + ')')
-            ;
-        });
+        itemNew
+            .append('circle')
+            .attr('class', 'circle')
+            .attr('r', rFn)
+            .attr('cx', xFn)
+            .attr('cy', yFn)
+        ;
 
-        tracks.map(p(createArc, da, ds)).forEach(function (arc) {
-            /*
-            g.append('path')
-                .attr('d', arc.arc)
-                .attr('id', 'arc-' + arc.track.rank)
-                .attr('transform', 'translate(240,240)')
-            ;
-            */
-/*
-            g.append('text')
-                .style('fill', '#FFF')
-                .attr('font-size', '8pt')
-                .append('textPath')
-                .attr('xlink:href', '#arc-' + arc.track.rank)
-                .style('text-anchor', 'middle')
-                .attr('startOffset', '0%')
-                .text(arc.track.rank)
-                */
-        });
+        itemNew
+            .append('path')
+            .attr('class', 'popularity')
+            .attr('d', p(createArc, da, ds, 0.34 * width))
+            .attr('fill', p(color))
+            .attr('transform', translate(cx, cy))
+        ;
+
+        itemNew
+            .append('text')
+            .append('textPath')
+            .attr('class', 'rank')
+            .attr('xlink:href', '#rank-path')
+            .attr('startOffset', function (track, i) {
+                return (100 * angle(da, 0, i) / (2 * Math.PI - ds)) + '%';
+            })
+            .text(function (track) { return track.rank; })
+        ;
     }
 
     function createArc(da, ds, r, track, i) {
@@ -188,7 +213,7 @@
             .endAngle(angle(da, ds, i) + 0.5 * w * da)
         ;
 
-        return {track: track, arc: arc};
+        return arc();
     }
 
     function angle(da, ds, i) {
