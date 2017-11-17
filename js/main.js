@@ -102,9 +102,92 @@
             .attr('d', path.toString())
         ;
 
+        // 0.34 * width - 60 is the maximal width of a singe track line
+        // (please see, where createArc is called out).
+        createPopularitySlider(svg, 0.34 * width - 60)
+            .attr('transform', translate(0.5 * width, 0.5 * height - (0.34 * width - 10)))
+        ;
+
         return {
             svg: svg
         };
+    }
+
+    function createPopularitySlider(parent, length) {
+        var slider = parent
+            .append('g')
+            .attr('class', 'pop-slider')
+        ;
+
+        var handle = slider.append('g');
+
+        var x = d3.scaleLinear()
+            .domain([0, 100])
+            .range([0, length])
+            .clamp(true)
+        ;
+
+        var min = x.range()[0];
+        var max = x.range()[1];
+        var mid = 0.5 * (max - min);
+
+        var knobScale = d3.scaleLinear()
+            .domain([8, 12])
+            .range([0, length])
+        ;
+
+        slider
+            .append('line')
+            .attr('class', 'pop-slider-track')
+            .attr('y1', min)
+            .attr('y2', max)
+        ;
+
+        slider.append('circle').attr('class', 'pop-slider-max').attr('r', 8).attr('cy', min);
+        slider.append('circle').attr('class', 'pop-slider-mid').attr('r', 10).attr('cy', mid);
+        slider.append('circle').attr('class', 'pop-slider-min').attr('r', 12).attr('cy', max);
+
+        slider.append('text').attr('class', 'pop-slider-txt').attr('y', min + 3).attr('text-anchor', 'middle').text(0);
+        slider.append('text').attr('class', 'pop-slider-txt').attr('y', mid + 3).attr('text-anchor', 'middle').text(50);
+        slider.append('text').attr('class', 'pop-slider-txt').attr('y', max + 3).attr('text-anchor', 'middle').text(100);
+
+        var knob = slider
+            .append('circle')
+            .attr('class', 'pop-slider-knob')
+            .attr('r', 5)
+        ;
+
+        var knobText = slider
+            .append('text')
+            .attr('class', 'pop-slider-knob-text')
+        ;
+
+        adjustPopularityKnob(knob, knobText, x, 0);
+
+        slider
+            .append('line')
+            .attr('class', 'pop-slider-overlay')
+            .attr('y1', min)
+            .attr('y2', max)
+            .call(d3.drag()
+                .on('start.interrupt', function() { slider.interrupt(); })
+                .on('start drag', function () { adjustPopularityKnob(knob, knobText, x, d3.event.y); })
+            )
+        ;
+
+        return slider;
+    }
+
+    function adjustPopularityKnob(knob, text, scale, y) {
+        var popularity = scale.invert(y);
+        var t = popularity * 0.01;
+        var radius = (1 - t) * 8 + t * 12;
+
+        knob.attr('cy', scale(popularity));
+        knob.attr('r', radius);
+        text.text(Math.round(popularity));
+        text.attr('y', scale(popularity) + 5)
+        text.attr('x', radius + 5);
     }
 
     function translate(x, y) {
@@ -162,7 +245,7 @@
 
         itemsAll
             .select('.popularity')
-            .attr('d', p(createArc, da, ds, 0.34 * width))
+            .attr('d', p(createArc, da, ds, 0.34 * width, 50, 10))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
         ;
@@ -178,13 +261,27 @@
         itemsDel.remove();
     }
 
-    function createArc(da, ds, r, track, i) {
+    /**
+     * @param {Float}   da    Angle (in radians) to use per track
+     * @param {Float}   ds    Space above for the slider (???)
+     * @param {Integer} r     Radius (in pixels) of the maximum
+     * @param {Fkoat}   r1    Radius of the inner clear area (in pixels)
+     * @param {Float}   r2    Radius of the outer clear area (in pixels)
+     * @param {Object}  track
+     * @param {Integer} i
+     *
+     * @return {[type]}
+     */
+    function createArc(da, ds, r, ri, ro, track, i) {
         var s = 0;
         var a = i * da;
         var w = 0.2;
 
+        var lmin = ((r - ri - ro) / r);
+        var lmax = (r - ro) / r;
+
         var arc = d3.arc()
-            .innerRadius(0.1 * r + 0.8 * r * (1 - 0.01 * track.popularity))
+            .innerRadius(r * (lmax - lmin * 0.01 * track.popularity))
             .outerRadius(r)
             .startAngle(angle(da, ds, i) - 0.5 * w * da)
             .endAngle(angle(da, ds, i) + 0.5 * w * da)

@@ -44,3 +44,45 @@ body {
     font-size: 10pt;
     fill: #FFFFFF;
 }
+
+.pop-slider-track {
+    stroke: #FFF;
+    stroke-width: 2px;
+}
+
+.pop-slider-overlay {
+    cursor: pointer;
+    pointer-events: stroke;
+    stroke-linecap: round;
+    stroke-width: 24px;
+    stroke: transparent;
+}
+
+.pop-slider-knob {
+    stroke: #FFFFFF;
+    fill: #433F5F;
+    stroke-width: 2px;
+}
+
+.pop-slider-knob-text {
+    fill: #FFFFFF;
+    font-size: 10pt;
+    font-family: 'Verdana';
+}
+
+.pop-slider-max {
+    fill: #FFF;
+}
+
+.pop-slider-min {
+    fill: #FFF;
+}
+
+.pop-slider-mid {
+    fill: #FFF;
+}
+
+.pop-slider-txt {
+    font-family: 'Verdana';
+    font-size: 8pt;
+}
