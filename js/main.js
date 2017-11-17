@@ -113,7 +113,7 @@
 
     function color(track) {
         // Linear interpolation between 2 values.
-        var l = function l(a, b, t) { return (1 - t) * a + t * b; };
+        var l = function l(a, b, t) { return Math.round((1 - t) * a + t * b); };
 
         var h = [85, 230, 230]; // Happy
         var n = [255, 255, 255]; // Neutral
