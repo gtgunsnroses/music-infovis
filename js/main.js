@@ -260,7 +260,7 @@
         var g = t < 0.5 ? l(s[1], n[1], t / 0.5) : l(n[1], h[1], (t - 0.5) / 0.5);
         var b = t < 0.5 ? l(s[2], n[2], t / 0.5) : l(n[2], h[2], (t - 0.5) / 0.5);
 
-        return 'rgba(' + r + ', ' + g + ', ' + b + ')';
+        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
     }
 
     function updateDetail(chart, tracksAndYear) {
