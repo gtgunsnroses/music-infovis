@@ -273,15 +273,6 @@
         var width = parseInt(chart.svg.style('width'), 10);
         var height = parseInt(chart.svg.style('height'), 10);
 
-        chart.svg.select('.pop-slider').on('slider-adjusted.filter', function () {
-            chart.popularityDisk.threshold = d3.event.detail.popularity;
-            repo
-                .tracksOfYear(year)
-                .then(function (tracks) { return {tracks: tracks, year: year}; })
-                .then(p(updateDetail, chart))
-            ;
-        });
-
         var container = chart.svg.select('.detail-container');
 
         var cx = chart.popularityDisk.center.x;
@@ -339,9 +330,7 @@
             .attr('d', p(createArc, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
-            .attr('fill-opacity', function (track) {
-                return track.popularity < chart.popularityDisk.threshold ? 0.3 : 1.0;
-            })
+            .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .on('mouseenter', function(track, i) {
                 $('#song-name').empty()
                 $('#song-artist').empty()
@@ -366,6 +355,13 @@
             })
         ;
 
+        chart.svg.selectAll('.pop-slider').on('slider-adjusted-continuous.filter', function () {
+            itemsAll
+                .select('.popularity')
+                .attr('fill-opacity', p(updateOpacity, d3.event.detail.popularity))
+            ;
+        });
+
         itemsAll
             .select('.rank')
             .attr('startOffset', function (track, i) {
@@ -375,6 +371,10 @@
         ;
 
         itemsDel.remove();
+    }
+
+    function updateOpacity(popularity, track) {
+        return track.popularity < popularity ? 0.3 : 1.0;
     }
 
     /**
