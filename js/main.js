@@ -85,30 +85,20 @@
         var chart = {
             svg: svg,
             popularityDisk: {
+                center: {
+                    x: 0.5 * width, // pixels
+                    y: 0.5 * height // pixels
+                },
                 marginInner: 100,  // pixels
                 marginOuter: 10,  // pixels
                 sliderSpace: 0.05, // fraction of entire disk
+                radius: 0.34 * width // pixels
             }
         };
 
-        var path = d3.path();
-        path.arc(
-            0.5 * width,
-            0.5 * height,
-            0.35 * width,
-            (2 * Math.PI) * (0 + 0.5 * chart.popularityDisk.sliderSpace) - 0.5 * Math.PI,
-            (2 * Math.PI) * (1 - 0.5 * chart.popularityDisk.sliderSpace) - 0.5 * Math.PI
-        );
-
-        svg
-            .append('path')
+        createRankPath(svg, chart.popularityDisk)
             .attr('id', 'rank-path')
             .attr('class', 'rank-path')
-            .attr('d', path.toString())
-        ;
-
-        svg
-            .append('circle')
         ;
 
         var popFilterArc = d3.arc()
@@ -125,10 +115,8 @@
             .attr('transform', translate(0.5 * width, 0.5 * height))
         ;
 
-        // 0.34 * width - 100 is the maximal width of a singe track line
-        // (please see, where createArc is called out).
-        createPopularitySlider(svg, 0.34 * width - (chart.popularityDisk.marginInner + chart.popularityDisk.marginOuter))
-            .attr('transform', translate(0.5 * width, 0.5 * height - (0.34 * width - chart.popularityDisk.marginOuter)))
+        createPopularitySlider(svg, chart.popularityDisk)
+            .attr('class', 'pop-slider')
             .on('slider-adjusted', function () {
                 var popularity = d3.event.detail.popularity;
                 popFilter.attr('d', popFilterArc.outerRadius(innerRadius(0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, popularity))());
@@ -143,12 +131,25 @@
         return chart;
     }
 
-    function createPopularitySlider(parent, length) {
-        var slider = parent
-            .append('g')
-            .attr('class', 'pop-slider')
-        ;
+    function createRankPath(parent, popularityDisk) {
+        var path = d3.path();
+        path.arc(
+            popularityDisk.center.x,
+            popularityDisk.center.y,
+            popularityDisk.radius + 10,
+            (2 * Math.PI) * (0 + 0.5 * popularityDisk.sliderSpace) - 0.5 * Math.PI,
+            (2 * Math.PI) * (1 - 0.5 * popularityDisk.sliderSpace) - 0.5 * Math.PI
+        );
 
+        return parent
+            .append('path')
+            .attr('d', path.toString())
+        ;
+    }
+
+    function createPopularitySlider(parent, disk) {
+        var length = disk.radius - (disk.marginInner + disk.marginOuter);
+        var slider = parent.append('g');
         var handle = slider.append('g');
 
         var x = d3.scaleLinear()
@@ -195,6 +196,7 @@
         adjustPopularityKnob(knob, knobText, x, 0);
 
         slider
+            .attr('transform', translate(disk.center.x, disk.center.y - (disk.radius - disk.marginOuter)))
             .append('line')
             .attr('class', 'pop-slider-overlay')
             .attr('y1', min)
@@ -253,8 +255,8 @@
 
         var container = chart.svg.select('.detail-container');
 
-        var cx = 0.5 * width;
-        var cy = 0.5 * height;
+        var cx = chart.popularityDisk.center.x;
+        var cy = chart.popularityDisk.center.y;
 
         var rFn = function (track) { return Math.pow(track.energy, 2) * 20; };
         var xFn = function (track, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); };
@@ -280,7 +282,7 @@
 
         itemsAll
             .select('.popularity')
-            .attr('d', p(createArc, da, ds, 0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
+            .attr('d', p(createArc, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
         ;
