@@ -285,7 +285,7 @@
         var cx = chart.popularityDisk.center.x;
         var cy = chart.popularityDisk.center.y;
 
-        var rFn = function (track) { return Math.pow(track.energy, 2) * 20; };
+        var rFn = function (track) { return 8; };
         var xFn = function (track, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); };
         var yFn = function (track, i) { return cy + 0.4 * width * Math.sin(angle(da, ds, i) - 0.5 * Math.PI); };
 
@@ -294,17 +294,43 @@
         var itemsNew = itemsOld.enter();
 
         itemsNew = itemsNew.append('g').attr('class', 'detail-item');
-        itemsNew.append('circle').attr('class', 'circle');
+        itemsNew.append('g').attr('class', 'circle-container').append('circle').attr('class', 'circle');
         itemsNew.append('path').attr('class', 'popularity');
         itemsNew.append('text').append('textPath').attr('class', 'rank').attr('xlink:href', '#rank-path');
 
         var itemsAll = itemsOld.merge(itemsNew);
 
         itemsAll
+            .select('.circle-container')
+            .attr('transform', function (track, i) {return 'translate(' + xFn(track, i) + ',' + yFn(track, i) + ')'})
+        ;
+
+        itemsAll
             .select('.circle')
             .attr('r', rFn)
-            .attr('cx', xFn)
-            .attr('cy', yFn)
+            .attr('class', function(track, i) {
+                var circleClass = 'circle';
+                var vibrateFrequency = (function(value){
+                    var index = null
+                    if (value < 50) index = 1;
+                    else if (value >= 50 && value < 90) index = 2;
+                    else if (value >= 90 && value < 130) index = 3;
+                    else if (value >= 130 && value < 170) index = 4;
+                    else {index = 5;}
+                    return 'vibrate-frequency-' + index
+                })(track.tempo)
+                var vibrateSize = (function(value){
+                    var index = null;
+                    console.log(value)
+                    if (value < 0.2) index = 1;
+                    else if (value >= 0.2 && value < 0.4) index = 2;
+                    else if (value >= 0.4 && value < 0.6) index = 3;
+                    else if (value >= 0.6 && value < 0.8) index = 4;
+                    else {index = 5; console.log(track)}
+                    return 'vibrate-size-' + index
+                })(track.energy)
+                return circleClass + ' ' + vibrateFrequency + ' ' + vibrateSize
+            })
         ;
 
         itemsAll
