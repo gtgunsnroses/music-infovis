@@ -374,7 +374,7 @@
     }
 
     function updateOpacity(popularity, track) {
-        return track.popularity < popularity ? 0.3 : 1.0;
+        return track.popularity < popularity ? 0.1 : 1.0;
     }
 
     /**
