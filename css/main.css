@@ -242,3 +242,17 @@ body {
   margin-top: 1rem;
   color: #FAA5A5;
 }
+
+.player-control-play {
+  fill: #FFFFFF;
+  cursor: pointer;
+}
+
+.player-control-pause {
+  fill: #FFFFFF;
+  cursor: pointer;
+}
+
+.player-control-visible {
+  display: none;
+}

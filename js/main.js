@@ -1,4 +1,4 @@
-(function (d3, w) {
+(function (d3, w, SpotifyWebApi) {
     'use strict';
 
     var repo = w.repository('data/everything.csv');
@@ -125,12 +125,60 @@
             .dispatch('slider-adjusted', {detail: {popularity: chart.popularityDisk.threshold}})
         ;
 
+        createPlayer(svg, chart.popularityDisk)
+            .attr('class', 'player-control')
+        ;
+
         svg
             .append('g')
             .attr('class', 'detail-container')
         ;
 
         return chart;
+    }
+
+    function createPlayer(parent, disk) {
+        var player = parent
+            .append('g')
+            .attr('transform', translate(disk.center.x - 15, disk.center.y - 15))
+        ;
+
+        var playBtn = player
+            .append('g')
+            .attr('class', 'player-control-play')
+            .classed('player-control-visible', true)
+            .on('click', play)
+        ;
+
+        playBtn
+            .append('polygon')
+            .attr('points', '0,0 30,15 0,30')
+        ;
+
+        var pauseBtn = player
+            .append('g')
+            .attr('class', 'player-control-pause')
+            .classed('player-control-visible', true)
+            .on('click', pause)
+        ;
+
+        pauseBtn
+            .append('rect')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('width', 10)
+            .attr('height', 30)
+        ;
+
+        pauseBtn
+            .append('rect')
+            .attr('x', 20)
+            .attr('y', 0)
+            .attr('width', 10)
+            .attr('height', 30)
+        ;
+
+        return player;
     }
 
     function updateFilterArc(arc, disk, _) {
@@ -331,6 +379,7 @@
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
             .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
+            .on('click', changeTrackAndPlay)
             .on('mouseenter', function(track, i) {
                 $('#song-name').empty()
                 $('#song-artist').empty()
@@ -371,6 +420,29 @@
         ;
 
         itemsDel.remove();
+    }
+
+    function changeTrackAndPlay(track) {
+        d3
+            .select('#player')
+            .attr('src', 'https://p.scdn.co/mp3-preview/15f78fd0c74a576cddb1362fd8dae43b984b37a2?cid=b1f28da8553c44beb65edac3ed1abac7')
+        ;
+
+        play();
+    }
+
+    function play() {
+        console.log('playing');
+        d3.select('#player')['_groups'][0][0].play();
+        d3.select('.player-control-play').classed('player-control-visible', true);
+        d3.select('.player-control-pause').classed('player-control-visible', false);
+    }
+
+    function pause() {
+        console.log('pausing');
+        d3.select('#player')['_groups'][0][0].pause();
+        d3.select('.player-control-play').classed('player-control-visible', false);
+        d3.select('.player-control-pause').classed('player-control-visible', true);
     }
 
     function updateOpacity(popularity, track) {
@@ -418,4 +490,4 @@
     }
 
 
-})(d3, window);
+})(d3, window, SpotifyWebApi);
