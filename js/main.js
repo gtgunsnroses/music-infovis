@@ -82,10 +82,6 @@
             .attr("height", height)
         ;
 
-        svg
-            .append('g')
-            .attr('class', 'detail-container')
-        ;
         var path = d3.path();
         path.arc(
             0.5 * width,
@@ -102,14 +98,46 @@
             .attr('d', path.toString())
         ;
 
-        // 0.34 * width - 60 is the maximal width of a singe track line
+        svg
+            .append('circle')
+        ;
+
+        var popFilterArc = d3.arc()
+            .innerRadius(100)
+            .outerRadius(innerRadius(0.34 * width, 100, 10, 0))
+            .startAngle(0)
+            .endAngle(2 * Math.PI)
+        ;
+
+        var popFilter = svg
+            .append('path')
+            .attr('d', popFilterArc())
+            .attr('class', 'popularity-filter')
+            .attr('transform', translate(0.5 * width, 0.5 * height))
+        ;
+
+        // 0.34 * width - 100 is the maximal width of a singe track line
         // (please see, where createArc is called out).
-        createPopularitySlider(svg, 0.34 * width - 60)
+        createPopularitySlider(svg, 0.34 * width - 110)
             .attr('transform', translate(0.5 * width, 0.5 * height - (0.34 * width - 10)))
+            .on('slider-adjusted', function () {
+                var popularity = d3.event.detail.popularity;
+                popFilter.attr('d', popFilterArc.outerRadius(innerRadius(0.34 * width, 100, 10, popularity))());
+            })
+        ;
+
+        svg
+            .append('g')
+            .attr('class', 'detail-container')
         ;
 
         return {
-            svg: svg
+            svg: svg,
+            popularityDisk: {
+                marginInner: 50,  // pixels
+                marginOuter: 10,  // pixels
+                sliderSpace: 0.1, // fraction of entire disk
+            }
         };
     }
 
@@ -171,15 +199,20 @@
             .attr('y2', max)
             .call(d3.drag()
                 .on('start.interrupt', function() { slider.interrupt(); })
-                .on('start drag', function () { adjustPopularityKnob(knob, knobText, x, d3.event.y); })
+                .on('start drag', function () {
+                    var popularity = x.invert(d3.event.y);
+                    adjustPopularityKnob(knob, knobText, x, popularity);
+                    slider.dispatch('slider-adjusted', {detail: {
+                        popularity: Math.round(popularity)
+                    }});
+                })
             )
         ;
 
         return slider;
     }
 
-    function adjustPopularityKnob(knob, text, scale, y) {
-        var popularity = scale.invert(y);
+    function adjustPopularityKnob(knob, text, scale, popularity) {
         var t = popularity * 0.01;
         var radius = (1 - t) * 8 + t * 12;
 
@@ -245,7 +278,7 @@
 
         itemsAll
             .select('.popularity')
-            .attr('d', p(createArc, da, ds, 0.34 * width, 50, 10))
+            .attr('d', p(createArc, da, ds, 0.34 * width, 100, 10))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
         ;
@@ -281,13 +314,20 @@
         var lmax = (r - ro) / r;
 
         var arc = d3.arc()
-            .innerRadius(r * (lmax - lmin * 0.01 * track.popularity))
+            .innerRadius(innerRadius(r, ri, ro, track.popularity))
             .outerRadius(r)
             .startAngle(angle(da, ds, i) - 0.5 * w * da)
             .endAngle(angle(da, ds, i) + 0.5 * w * da)
         ;
 
         return arc();
+    }
+
+    function innerRadius(r, ri, ro, popularity) {
+        var lmin = ((r - ri - ro) / r);
+        var lmax = (r - ro) / r;
+
+        return r * (lmax - lmin * 0.01 * popularity)
     }
 
     function angle(da, ds, i) {
