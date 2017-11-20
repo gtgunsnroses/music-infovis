@@ -201,3 +201,48 @@ body {
     transform: scale(1);
   }
 }
+
+#song-detail {
+  display: none;
+  position: absolute;
+  width: 15rem;
+  background-color: #433F5F;
+  border: 1px solid rgba(169, 169, 169, 41);
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.6rem;
+}
+
+#song-detail {
+  margin-bottom: 0.2rem;
+}
+
+.detail-show {
+  display: block !important;
+}
+
+
+#song-name {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+#song-artist {
+  font-weight: 500;
+  color: #b1afaf;
+  margin-bottom: 1rem;
+}
+
+.label {
+  width: 5rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between
+}
+
+#click-prompt {
+  margin-top: 1rem;
+  color: #FAA5A5;
+}

@@ -341,6 +341,28 @@
             .attr('fill-opacity', function (track) {
                 return track.popularity < chart.popularityDisk.threshold ? 0.3 : 1.0;
             })
+            .on('mouseenter', function(track, i) {
+                $('#song-name').empty()
+                $('#song-artist').empty()
+                $('#energy').empty()
+                $('#danceability').empty()
+                $('#tempo').empty()
+                $('#song-detail').addClass('detail-show')
+                $('#song-name').append(track.name)
+                $('#song-artist').append(track.artist)
+                $('#energy').append(track.energy);
+                $('#danceability').append(track.danceability)
+                $('#tempo').append(track.tempo)
+                $(document).on('mousemove', function(e){
+                    $('#song-detail').css({
+                       left:  e.pageX,
+                       top:   e.pageY + 30
+                    });
+                });
+            })
+            .on('mouseout', function() {
+                $('#song-detail').removeClass('detail-show')
+            })
         ;
 
         itemsAll

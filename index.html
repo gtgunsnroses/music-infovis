@@ -8,7 +8,29 @@
 
 <div class="container">
   <div id="overview" class="overview"></div>
-  <div id="detail" class="detail"></div>
+  <div id="detail" class="detail">
+        <div id='song-detail'>
+            <div id='song-name'>
+            </div>
+            <div id='song-artist'>
+            </div>
+            <div class='row'>
+                <span class='label'>Energy</span>
+                <span id='energy'></span>
+            </div>
+            <div class='row'>
+                <span class='label'>Danceability</span>
+                <span id='danceability'></span>
+            </div>
+            <div class='row'>
+                <span class='label'>Tempo</span>
+                <span id='tempo'></span>
+            </div>
+            <div id='click-prompt'>
+                Click to listen
+            </div>
+        </div>
+  </div>
 
   <div style="position: fixed">
     <div class="year" value="1965">1965</div>
@@ -67,6 +89,7 @@
 
 <div id="vis"></div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js"></script>
 <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
 <script src="./lib/d3.js"></script>
