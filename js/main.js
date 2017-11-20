@@ -82,13 +82,22 @@
             .attr("height", height)
         ;
 
+        var chart = {
+            svg: svg,
+            popularityDisk: {
+                marginInner: 100,  // pixels
+                marginOuter: 10,  // pixels
+                sliderSpace: 0.05, // fraction of entire disk
+            }
+        };
+
         var path = d3.path();
         path.arc(
             0.5 * width,
             0.5 * height,
             0.35 * width,
-            (10 / 180) * Math.PI - 0.5 * Math.PI,
-            (350 / 180) * Math.PI - 0.5 * Math.PI
+            (2 * Math.PI) * (0 + 0.5 * chart.popularityDisk.sliderSpace) - 0.5 * Math.PI,
+            (2 * Math.PI) * (1 - 0.5 * chart.popularityDisk.sliderSpace) - 0.5 * Math.PI
         );
 
         svg
@@ -103,8 +112,8 @@
         ;
 
         var popFilterArc = d3.arc()
-            .innerRadius(100)
-            .outerRadius(innerRadius(0.34 * width, 100, 10, 0))
+            .innerRadius(chart.popularityDisk.marginInner)
+            .outerRadius(innerRadius(0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, 0))
             .startAngle(0)
             .endAngle(2 * Math.PI)
         ;
@@ -118,11 +127,11 @@
 
         // 0.34 * width - 100 is the maximal width of a singe track line
         // (please see, where createArc is called out).
-        createPopularitySlider(svg, 0.34 * width - 110)
-            .attr('transform', translate(0.5 * width, 0.5 * height - (0.34 * width - 10)))
+        createPopularitySlider(svg, 0.34 * width - (chart.popularityDisk.marginInner + chart.popularityDisk.marginOuter))
+            .attr('transform', translate(0.5 * width, 0.5 * height - (0.34 * width - chart.popularityDisk.marginOuter)))
             .on('slider-adjusted', function () {
                 var popularity = d3.event.detail.popularity;
-                popFilter.attr('d', popFilterArc.outerRadius(innerRadius(0.34 * width, 100, 10, popularity))());
+                popFilter.attr('d', popFilterArc.outerRadius(innerRadius(0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, popularity))());
             })
         ;
 
@@ -131,14 +140,7 @@
             .attr('class', 'detail-container')
         ;
 
-        return {
-            svg: svg,
-            popularityDisk: {
-                marginInner: 50,  // pixels
-                marginOuter: 10,  // pixels
-                sliderSpace: 0.1, // fraction of entire disk
-            }
-        };
+        return chart;
     }
 
     function createPopularitySlider(parent, length) {
@@ -244,7 +246,7 @@
     }
 
     function updateDetail(chart, tracks) {
-        var ds = (20 / 180) * Math.PI;
+        var ds = chart.popularityDisk.sliderSpace * (2 * Math.PI);
         var da = (2 * Math.PI - ds) / tracks.length;
         var width = parseInt(chart.svg.style('width'), 10);
         var height = parseInt(chart.svg.style('height'), 10);
@@ -278,7 +280,7 @@
 
         itemsAll
             .select('.popularity')
-            .attr('d', p(createArc, da, ds, 0.34 * width, 100, 10))
+            .attr('d', p(createArc, da, ds, 0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
         ;
