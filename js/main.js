@@ -112,6 +112,8 @@
         var popFilter = svg
             .append('path')
             .attr('class', 'popularity-filter')
+            .attr('fill', '#FF0000')
+            .attr('fill-opacity', '0.25')
             .attr('transform', translate(chart.popularityDisk.center.x, chart.popularityDisk.center.y))
         ;
 
