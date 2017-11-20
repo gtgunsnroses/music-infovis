@@ -6,11 +6,18 @@
     var detail = createDetail(1000, 1000);
 
     repo.averagePopularityByYear().then(p(updateOverview, overview));
-    repo.tracksOfYear(2000).then(p(updateDetail, detail));
+    repo.tracksOfYear(2000)
+        .then(function (tracks) { return {tracks: tracks, year: 2000}; })
+        .then(p(updateDetail, detail))
+    ;
 
     d3.selectAll('.year').on('mouseenter', function () {
         var year = this.getAttribute('value');
-        repo.tracksOfYear(year).then(p(updateDetail, detail));
+        repo
+            .tracksOfYear(year)
+            .then(function (tracks) { return {tracks: tracks, year: year}; })
+            .then(p(updateDetail, detail))
+        ;
     });
 
     function createOverview(width, height) {
@@ -92,7 +99,8 @@
                 marginInner: 100,  // pixels
                 marginOuter: 10,  // pixels
                 sliderSpace: 0.05, // fraction of entire disk
-                radius: 0.34 * width // pixels
+                radius: 0.34 * width, // pixels
+                threshold: 0, // 0 - 100 (popularity)
             }
         };
 
@@ -109,7 +117,10 @@
 
         createPopularitySlider(svg, chart.popularityDisk)
             .attr('class', 'pop-slider')
-            .on('slider-adjusted.arc', p(updateFilterArc, popFilter, chart.popularityDisk))
+            .on('slider-adjusted-continuous.arc', p(updateFilterArc, popFilter, chart.popularityDisk))
+            // Set the initial value.
+            .dispatch('slider-adjusted-continuous', {detail: {popularity: chart.popularityDisk.threshold}})
+            .dispatch('slider-adjusted', {detail: {popularity: chart.popularityDisk.threshold}})
         ;
 
         svg
@@ -203,6 +214,11 @@
             .call(d3.drag()
                 .on('start.interrupt', function() { slider.interrupt(); })
                 .on('start drag', function () {
+                    slider.dispatch('slider-adjusted-continuous', {detail: {
+                        popularity: Math.round(x.invert(d3.event.y))
+                    }});
+                })
+                .on('end', function () {
                     slider.dispatch('slider-adjusted', {detail: {
                         popularity: Math.round(x.invert(d3.event.y))
                     }});
@@ -210,15 +226,12 @@
             )
         ;
 
-        // Set the initial value.
-        slider.on('slider-adjusted.knob', p(adjustPopularityKnob, knob, knobText, x))
-        slider.dispatch('slider-adjusted', {detail: {popularity: 0}});
+        slider.on('slider-adjusted-continuous.knob', p(adjustPopularityKnob, knob, knobText, x))
 
         return slider;
     }
 
     function adjustPopularityKnob(knob, text, scale, _) {
-        console.log('asd');
         var popularity = d3.event.detail.popularity;
         var t = popularity * 0.01;
         var radius = (1 - t) * 8 + t * 12;
@@ -247,14 +260,25 @@
         var g = t < 0.5 ? l(s[1], n[1], t / 0.5) : l(n[1], h[1], (t - 0.5) / 0.5);
         var b = t < 0.5 ? l(s[2], n[2], t / 0.5) : l(n[2], h[2], (t - 0.5) / 0.5);
 
-        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+        return 'rgba(' + r + ', ' + g + ', ' + b + ')';
     }
 
-    function updateDetail(chart, tracks) {
+    function updateDetail(chart, tracksAndYear) {
+        var year = tracksAndYear.year;
+        var tracks = tracksAndYear.tracks;
         var ds = chart.popularityDisk.sliderSpace * (2 * Math.PI);
         var da = (2 * Math.PI - ds) / tracks.length;
         var width = parseInt(chart.svg.style('width'), 10);
         var height = parseInt(chart.svg.style('height'), 10);
+
+        chart.svg.select('.pop-slider').on('slider-adjusted.filter', function () {
+            chart.popularityDisk.threshold = d3.event.detail.popularity;
+            repo
+                .tracksOfYear(year)
+                .then(function (tracks) { return {tracks: tracks, year: year}; })
+                .then(p(updateDetail, chart))
+            ;
+        });
 
         var container = chart.svg.select('.detail-container');
 
@@ -288,6 +312,9 @@
             .attr('d', p(createArc, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
+            .attr('fill-opacity', function (track) {
+                return track.popularity < chart.popularityDisk.threshold ? 0.3 : 1.0;
+            })
         ;
 
         itemsAll
