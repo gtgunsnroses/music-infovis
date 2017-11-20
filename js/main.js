@@ -321,12 +321,11 @@
                 })(track.tempo)
                 var vibrateSize = (function(value){
                     var index = null;
-                    console.log(value)
                     if (value < 0.2) index = 1;
                     else if (value >= 0.2 && value < 0.4) index = 2;
                     else if (value >= 0.4 && value < 0.6) index = 3;
                     else if (value >= 0.6 && value < 0.8) index = 4;
-                    else {index = 5; console.log(track)}
+                    else {index = 5;}
                     return 'vibrate-size-' + index
                 })(track.energy)
                 return circleClass + ' ' + vibrateFrequency + ' ' + vibrateSize
