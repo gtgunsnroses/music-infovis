@@ -101,26 +101,15 @@
             .attr('class', 'rank-path')
         ;
 
-        var popFilterArc = d3.arc()
-            .innerRadius(chart.popularityDisk.marginInner)
-            .outerRadius(innerRadius(0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, 0))
-            .startAngle(0)
-            .endAngle(2 * Math.PI)
-        ;
-
         var popFilter = svg
             .append('path')
-            .attr('d', popFilterArc())
             .attr('class', 'popularity-filter')
-            .attr('transform', translate(0.5 * width, 0.5 * height))
+            .attr('transform', translate(chart.popularityDisk.center.x, chart.popularityDisk.center.y))
         ;
 
         createPopularitySlider(svg, chart.popularityDisk)
             .attr('class', 'pop-slider')
-            .on('slider-adjusted', function () {
-                var popularity = d3.event.detail.popularity;
-                popFilter.attr('d', popFilterArc.outerRadius(innerRadius(0.34 * width, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, popularity))());
-            })
+            .on('slider-adjusted.arc', p(updateFilterArc, popFilter, chart.popularityDisk))
         ;
 
         svg
@@ -129,6 +118,18 @@
         ;
 
         return chart;
+    }
+
+    function updateFilterArc(arc, disk, _) {
+        var popularity = d3.event.detail.popularity;
+        var path = d3.arc()
+            .innerRadius(disk.marginInner)
+            .outerRadius(innerRadius(disk.radius, disk.marginInner, disk.marginOuter, popularity))
+            .startAngle(0)
+            .endAngle(2 * Math.PI)
+        ;
+
+        arc.attr('d', path());
     }
 
     function createRankPath(parent, popularityDisk) {
@@ -193,8 +194,6 @@
             .attr('class', 'pop-slider-knob-text')
         ;
 
-        adjustPopularityKnob(knob, knobText, x, 0);
-
         slider
             .attr('transform', translate(disk.center.x, disk.center.y - (disk.radius - disk.marginOuter)))
             .append('line')
@@ -204,19 +203,23 @@
             .call(d3.drag()
                 .on('start.interrupt', function() { slider.interrupt(); })
                 .on('start drag', function () {
-                    var popularity = x.invert(d3.event.y);
-                    adjustPopularityKnob(knob, knobText, x, popularity);
                     slider.dispatch('slider-adjusted', {detail: {
-                        popularity: Math.round(popularity)
+                        popularity: Math.round(x.invert(d3.event.y))
                     }});
                 })
             )
         ;
 
+        // Set the initial value.
+        slider.on('slider-adjusted.knob', p(adjustPopularityKnob, knob, knobText, x))
+        slider.dispatch('slider-adjusted', {detail: {popularity: 0}});
+
         return slider;
     }
 
-    function adjustPopularityKnob(knob, text, scale, popularity) {
+    function adjustPopularityKnob(knob, text, scale, _) {
+        console.log('asd');
+        var popularity = d3.event.detail.popularity;
         var t = popularity * 0.01;
         var radius = (1 - t) * 8 + t * 12;
 
