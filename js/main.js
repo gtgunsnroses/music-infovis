@@ -375,7 +375,7 @@
 
         itemsAll
             .select('.popularity')
-            .attr('d', p(createArc, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
+            .attr('d', p(createArc, 0.2, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
             .attr('fill', p(color))
             .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
@@ -398,11 +398,30 @@
                        top:   e.pageY + 30
                     });
                 });
+                return arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
             })
-            .on('mouseout', function() {
+            .on('mouseout', function(track, i) {
                 $('#song-detail').removeClass('detail-show')
+                return arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
             })
         ;
+
+
+        function arcGrow(da, ds, r, ri, ro, track, i) {
+            console.log(da, ds, r, ri, ro, track, i)
+            d3.select(this).transition().duration(0).attrTween("d", function(track) {
+              var interpolate = d3.interpolate(0.2, 1);
+              return function(t) { var w = interpolate(t); /*console.log([w, da, ds, r, ri, ro, track, i]);*/ return createArc(w, da, ds, r, ri, ro, track, i); };
+            });
+        }
+
+        function arcShrink(da, ds, r, ri, ro, track, i) {
+            console.log(da, ds, r, ri, ro, track, i)
+            d3.select(this).transition().duration(200).attrTween("d", function(track) {
+              var interpolate = d3.interpolate(1, 0.2);
+              return function(t) { var w = interpolate(t); /*console.log([w, da, ds, r, ri, ro, track, i]);*/ return createArc(w, da, ds, r, ri, ro, track, i); };
+            });
+        }
 
         chart.svg.selectAll('.pop-slider').on('slider-adjusted-continuous.filter', function () {
             itemsAll
@@ -460,10 +479,9 @@
      *
      * @return {[type]}
      */
-    function createArc(da, ds, r, ri, ro, track, i) {
+    function createArc(w, da, ds, r, ri, ro, track, i) {
         var s = 0;
         var a = i * da;
-        var w = 0.2;
 
         var lmin = ((r - ri - ro) / r);
         var lmax = (r - ro) / r;
@@ -490,4 +508,4 @@
     }
 
 
-})(d3, window, SpotifyWebApi);
+})(d3, window);
