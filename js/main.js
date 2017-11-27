@@ -408,18 +408,16 @@
 
 
         function arcGrow(da, ds, r, ri, ro, track, i) {
-            console.log(da, ds, r, ri, ro, track, i)
             d3.select(this).transition().duration(0).attrTween("d", function(track) {
               var interpolate = d3.interpolate(0.2, 1);
-              return function(t) { var w = interpolate(t); /*console.log([w, da, ds, r, ri, ro, track, i]);*/ return createArc(w, da, ds, r, ri, ro, track, i); };
+              return function(t) { var w = interpolate(t); return createArc(w, da, ds, r, ri, ro, track, i); };
             });
         }
 
         function arcShrink(da, ds, r, ri, ro, track, i) {
-            console.log(da, ds, r, ri, ro, track, i)
             d3.select(this).transition().duration(200).attrTween("d", function(track) {
               var interpolate = d3.interpolate(1, 0.2);
-              return function(t) { var w = interpolate(t); /*console.log([w, da, ds, r, ri, ro, track, i]);*/ return createArc(w, da, ds, r, ri, ro, track, i); };
+              return function(t) { var w = interpolate(t); return createArc(w, da, ds, r, ri, ro, track, i); };
             });
         }
 
