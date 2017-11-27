@@ -1,4 +1,4 @@
-(function (d3, w, SpotifyWebApi) {
+(function (d3, w) {
     'use strict';
 
     var repo = w.repository('data/everything.csv');
