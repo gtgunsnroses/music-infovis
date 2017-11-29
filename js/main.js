@@ -143,9 +143,8 @@
 
         createPopularitySlider(svg, chart.popularityDisk)
             .attr('class', 'pop-slider')
-            .on('slider-adjusted-continuous.arc', p(updateFilterArc, popFilter, chart.popularityDisk))
+            .on('slider-adjusted.arc', p(updateFilterArc, popFilter, chart.popularityDisk))
             // Set the initial value.
-            .dispatch('slider-adjusted-continuous', {detail: {popularity: chart.popularityDisk.threshold}})
             .dispatch('slider-adjusted', {detail: {popularity: chart.popularityDisk.threshold}})
         ;
 
@@ -288,19 +287,16 @@
             .call(d3.drag()
                 .on('start.interrupt', function() { slider.interrupt(); })
                 .on('start drag', function () {
-                    slider.dispatch('slider-adjusted-continuous', {detail: {
-                        popularity: Math.round(x.invert(d3.event.y))
-                    }});
-                })
-                .on('end', function () {
                     slider.dispatch('slider-adjusted', {detail: {
-                        popularity: Math.round(x.invert(d3.event.y))
+                        // Substracting disk center, because it is 50% from
+                        // beginning and we're also translating by -50% in CCS.
+                        popularity: Math.round(x.invert(d3.event.y + disk.center.y))
                     }});
                 })
             )
         ;
 
-        slider.on('slider-adjusted-continuous.knob', p(adjustPopularityKnob, knob, knobText, x))
+        slider.on('slider-adjusted.knob', p(adjustPopularityKnob, knob, knobText, x))
 
         return slider;
     }
@@ -445,8 +441,7 @@
             });
         }
 
-        chart.svg.selectAll('.pop-slider').on('slider-adjusted-continuous.filter', function () {
-            console.log('slide!')
+        chart.svg.selectAll('.pop-slider').on('slider-adjusted.filter', function () {
             itemsAll
                 .select('.popularity')
                 .attr('fill-opacity', p(updateOpacity, d3.event.detail.popularity))
