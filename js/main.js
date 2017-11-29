@@ -2,14 +2,23 @@
     'use strict';
 
     var repo = w.repository('data/everything.csv');
-    var overview = createOverview(500, 800);
-    var detail = createDetail(800, 800);
 
-    repo.avgByYear(['popularity', 'energy']).then(p(updateOverview, overview));
-    repo.tracksOfYear(2000)
-        .then(function (tracks) { return {tracks: tracks, year: 2000}; })
-        .then(p(updateDetail, detail))
-    ;
+    redraw();
+    w.addEventListener('resize', w.throttle(redraw, 200));
+
+    function redraw() {
+        var overviewParent = d3.select('#overview').html('');
+        var detailParent = d3.select('#detail').html('');
+
+        var overview = createOverview(overviewParent);
+        var detail = createDetail(detailParent);
+
+        repo.avgByYear(['popularity', 'energy']).then(p(updateOverview, overview));
+        repo.tracksOfYear(2000)
+            .then(function (tracks) { return {tracks: tracks, year: 2000}; })
+            .then(p(updateDetail, detail))
+        ;
+    }
 
     function updateYear(year) {
         repo
@@ -19,13 +28,16 @@
         ;
     }
 
-    function createOverview(width, height) {
+    function createOverview(parent) {
+        var width = parent.node().getBoundingClientRect().width;
+        var height = parent.node().getBoundingClientRect().height;
+
         // Dimensions of the chart.
         var margin = {top: 30, right: 20, bottom: 20, left: 50};
         width -= (margin.left + margin.right);
         height -= (margin.top + margin.bottom);
 
-        var svg = d3.select('#overview').append('svg')
+        var svg = parent.append('svg')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
         ;
@@ -89,8 +101,14 @@
         chart.svg.selectAll('.y-axis').call(d3.axisLeft(chart.y).tickFormat(d3.format('d')));
     }
 
-    function createDetail(width, height) {
-        var svg = d3.select('#detail').append('svg')
+    function createDetail(parent) {
+        var width = parent.node().getBoundingClientRect().width;
+        var height = parent.node().getBoundingClientRect().height;
+
+        width = width > height ? height : width;
+        height = height > width ? width : height;
+
+        var svg = parent.append('svg')
             .attr("width", width)
             .attr("height", height)
         ;
