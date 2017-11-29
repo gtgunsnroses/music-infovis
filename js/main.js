@@ -118,7 +118,7 @@
         var popFilter = svg
             .append('path')
             .attr('class', 'popularity-filter')
-            .attr('fill', '#FF0000')
+            .attr('fill', '#D9558A')
             .attr('fill-opacity', '0.25')
             .attr('transform', translate(chart.popularityDisk.center.x, chart.popularityDisk.center.y))
         ;
@@ -427,7 +427,10 @@
             });
         }
 
+        console.log('haha')
+
         chart.svg.selectAll('.pop-slider').on('slider-adjusted-continuous.filter', function () {
+            console.log('slide!')
             itemsAll
                 .select('.popularity')
                 .attr('fill-opacity', p(updateOpacity, d3.event.detail.popularity))
