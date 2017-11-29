@@ -427,8 +427,6 @@
             });
         }
 
-        console.log('haha')
-
         chart.svg.selectAll('.pop-slider').on('slider-adjusted-continuous.filter', function () {
             console.log('slide!')
             itemsAll
