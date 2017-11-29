@@ -13,18 +13,18 @@
         var overview = createOverview(overviewParent);
         var detail = createDetail(detailParent);
 
-        repo.avgByYear(['popularity', 'energy']).then(p(updateOverview, overview));
+        repo.avgByYear(['popularity', 'energy']).then(p(updateOverview, overview, detail));
         repo.tracksOfYear(2000)
             .then(function (tracks) { return {tracks: tracks, year: 2000}; })
             .then(p(updateDetail, detail))
         ;
     }
 
-    function updateYear(year) {
+    function updateYear(year, chart) {
         repo
             .tracksOfYear(year)
             .then(function (tracks) { return {tracks: tracks, year: year}; })
-            .then(p(updateDetail, detail))
+            .then(p(updateDetail, chart))
         ;
     }
 
@@ -67,7 +67,7 @@
         };
     }
 
-    function updateOverview(chart, pairs) {
+    function updateOverview(chart, detail, pairs) {
         // Scale the range of the data
         chart.y.domain(d3.extent(pairs, function(d) { return d.year; }));
         chart.x.domain([
@@ -94,7 +94,7 @@
             .attr('r', function (pair) { return (pair.popularity * 0.01) * 30; })
             .attr('cx', function (pair) { return chart.x(pair.energy); })
             .attr('cy', function (pair) { return chart.y(pair.year); })
-            .on('click', function (pair) { updateYear(pair.year); })
+            .on('click', function (pair) { updateYear(pair.year, detail); })
 
         // Update x-axis and y-axis.
         chart.svg.selectAll('.x-axis').call(d3.axisTop(chart.x).ticks(5));
@@ -411,7 +411,7 @@
                 $('#song-artist').append(track.artist)
                 $('#energy').append(track.energy);
                 $('#danceability').append(track.danceability)
-                $('#tempo').append(track.tempo)
+                $('#tempo').append(track.tempo);
                 $(document).on('mousemove', function(e){
                     $('#song-detail').css({
                        left:  e.pageX,
@@ -442,6 +442,7 @@
         }
 
         chart.svg.selectAll('.pop-slider').on('slider-adjusted.filter', function () {
+            chart.popularityDisk.threshold = d3.event.detail.popularity;
             itemsAll
                 .select('.popularity')
                 .attr('fill-opacity', p(updateOpacity, d3.event.detail.popularity))

@@ -278,23 +278,19 @@ body {
 
 #song-detail {
   display: none;
-  position: fixed;
+  position: absolute;
   width: 15rem;
   background-color: #433F5F;
   color: #fff;
   border-radius: 5px;
   padding: 0.6rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-#song-detail {
   margin-bottom: 0.2rem;
 }
 
-.detail-show {
+#song-detail.detail-show {
   display: block !important;
 }
-
 
 #song-name {
   font-weight: 600;
@@ -356,5 +352,3 @@ body {
 .popularity {
   cursor: pointer
 }
-
-

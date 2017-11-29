@@ -19,30 +19,27 @@
 </div>
 
 <div class="container">
-  <div style='display: none' id="overview" class="overview"></div>
-  <div id="detail" class="detail">
-        <div id='song-detail'>
-            <div id='song-name'>
-            </div>
-            <div id='song-artist'>
-            </div>
-            <div class='row'>
-                <span class='label'>Energy</span>
-                <span id='energy'></span>
-            </div>
-            <div class='row'>
-                <span class='label'>Danceability</span>
-                <span id='danceability'></span>
-            </div>
-            <div class='row'>
-                <span class='label'>Tempo</span>
-                <span id='tempo'></span>
-            </div>
-            <div id='click-prompt'>
-                Click to listen
-            </div>
-        </div>
+  <div id="overview" class="overview"></div>
+  <div id="detail" class="detail"></div>
+</div>
+
+<div id='song-detail'>
+  <div id='song-name'></div>
+  <div id='song-artist'></div>
+  <div class='row'>
+    <span class='label'>Energy</span>
+    <span id='energy'></span>
   </div>
+  <div class='row'>
+    <span class='label'>Danceability</span>
+    <span id='danceability'></span>
+  </div>
+  <div class='row'>
+    <span class='label'>Tempo</span>
+    <span id='tempo'></span>
+  </div>
+  <div id='click-prompt'>Click to listen</div>
+</div>
 
 <!-- The src will be filled at runtime -->
 <audio id="player" src="" type="audio/mpeg">
