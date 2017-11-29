@@ -3,16 +3,23 @@
   <meta charset="UTF-8">
   <title>Music Visualization</title>
   <link href="./css/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300,400" rel="stylesheet">
 </head>
 <body>
 
 
 <div class='head-nav'>
-    <div>About</div>
+    <div class='logo-container'><img class='logo-img' src='./img/mood_logo.png'/></div>
+    <div class='text-container'>
+        <div class='active'> Visualization </div>
+        <div> About </div>
+    </div>
 </div>
 
 <div class="container">
-  <div id="overview" class="overview"></div>
+  <div style='display: none' id="overview" class="overview"></div>
   <div id="detail" class="detail">
         <div id='song-detail'>
             <div id='song-name'>

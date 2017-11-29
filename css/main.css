@@ -1,26 +1,12 @@
-@font-face {
-    font-family: 'Times-Sans-Serif';
-    src:url('../font/Times-Sans-Serif.ttf.woff') format('woff'),
-        url('../font/Times-Sans-Serif.ttf.svg#Times-Sans-Serif') format('svg'),
-        url('../font/Times-Sans-Serif.ttf.eot'),
-        url('../font/Times-Sans-Serif.ttf.eot?#iefix') format('embedded-opentype');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'Lao-MN';
-    src:url('../font/Lao-MN.ttc'),
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 body {
 	display: block;
 	margin: 0;
 	height: 100%;
   background-color: #433F5F;
-  font-family: 'Lao-MN'
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .axis path,
@@ -37,6 +23,43 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 300;
+  color: #b1b1b1;
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);*/
+}
+
+.head-nav > div {
+  margin: 0 20px;
+}
+
+.logo-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.text-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text-container > div {
+  margin: 0 20px;
+}
+
+.head-nav .active {
+  color: FAA5A5;
+}
+
+.logo-img {
+  height: 17px;
+  margin: 0 20px;
 }
 
 .container {
@@ -89,7 +112,7 @@ body {
 
 .circle {
     fill: none;
-    stroke: #D9D9D9;
+    stroke: #b1b1b1;
     animation-iteration-count: infinite;
 }
 
@@ -258,10 +281,10 @@ body {
   position: fixed;
   width: 15rem;
   background-color: #433F5F;
-  border: 1px solid rgba(169, 169, 169, 41);
   color: #fff;
   border-radius: 5px;
   padding: 0.6rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #song-detail {
@@ -333,4 +356,5 @@ body {
 .popularity {
   cursor: pointer
 }
+
 
