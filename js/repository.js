@@ -35,8 +35,17 @@
             d3.csv(pathToData, function (table) { resolve(table); });
         });
 
+        this.avgByYear = function (props) {
+            var propsToFn = {};
+            for (var i in props) {
+                propsToFn[props[i]] = avg;
+            }
+
+            return gettingTable.then(p(aggregateByYear, propsToFn));
+        };
+
         this.averagePopularityByYear = function () {
-            return gettingTable.then(averagePopularityByYear);
+            return gettingTable.then(p(aggregateByYear, {'popularity': avg}));
         };
 
         this.tracksOfYear = function (year) {
@@ -44,33 +53,50 @@
         };
     };
 
+    function avg(v) {
+        return v.reduce(sum) / v.length;
+    }
+
     /**
-     * Computes average popularity by year. Example output:
+     * Computes an aggregate by year. Example output:
      *
      *   [
-     *     {year: 1991, popularity: 43.5},
-     *     {year: 1992, popularity: 56.4},
+     *     {year: 1991, *prop1*: 43.5, *prop2*: 15.6, ...},
+     *     {year: 1992, *prop1*: 56.4, *prop2*: 14.2, ...},
      *     ...
      *   ]
      *
-     * @param {Array} table The original data
+     * Example usage:
+     *
+     *   aggregateByYear({
+     *       popularity: avg,
+     *       energy: mean
+     *   }, table);
+     *
+     * @param {Object} keysToFn The properties to aggregate over mapped to aggregate functions
+     * @param {Array}  table
      *
      * @return {Array}
      */
-    function averagePopularityByYear(table) {
-        return table
-            .reduce(groupBy.bind(null, 'year', 'popularity'), [])
-            .filter(function (pair) { return !!pair.year; })
-            .map(function (pair) {
-                pair.popularity = pair.popularity
-                    .filter(function (v) { return v !== ''; })
-                    .map(function (v) { return +v; })
-                ;
+    function aggregateByYear(propsToFn, table) {
+        var props = Object.keys(propsToFn);
 
-                return {
-                    year: pair.year,
-                    popularity: pair.popularity.reduce(sum) / pair.popularity.length
-                };
+        return table
+            .reduce(groupBy.bind(null, 'year', props), [])
+            .filter(function (aggregate) { return !!aggregate.year; })
+            .map(function (aggregate) {
+                for (var i in props) {
+                    var prop = props[i];
+
+                    aggregate[prop] = aggregate[prop]
+                        .filter(function (v) { return v !== ''; })
+                        .map(function (v) { return +v; })
+                    ;
+
+                    aggregate[prop] = propsToFn[prop](aggregate[prop]);
+                }
+
+                return aggregate;
             })
         ;
     }
@@ -94,16 +120,18 @@
      * Adds the row to groups based on x and y attributes.
      *
      * @param {String} x
-     * @param {String} y
-     * @param {Array} groups
+     * @param {Array}  ys
+     * @param {Array}  groups
      * @param {Object} row
      *
      * @return {Array} New groups object
      */
-    function groupBy(x, y, groups, row) {
+    function groupBy(x, ys, groups, row) {
         for (var i in groups) {
           if (groups[i][x] === row[x]) {
-            groups[i][y].push(row[y]);
+            for (var j in ys) {
+                groups[i][ys[j]].push(row[ys[j]]);
+            }
 
             return groups;
           }
@@ -111,7 +139,9 @@
 
         var group = {};
         group[x] = row[x];
-        group[y] = [row[y]];
+        for (var j in ys) {
+            group[ys[j]] = [row[ys[j]]];
+        }
 
         groups.push(group);
 

@@ -2,27 +2,26 @@
     'use strict';
 
     var repo = w.repository('data/everything.csv');
-    var overview = createOverview(500, 300);
-    var detail = createDetail(1000, 1000);
+    var overview = createOverview(500, 800);
+    var detail = createDetail(800, 800);
 
-    repo.averagePopularityByYear().then(p(updateOverview, overview));
+    repo.avgByYear(['popularity', 'energy']).then(p(updateOverview, overview));
     repo.tracksOfYear(2000)
         .then(function (tracks) { return {tracks: tracks, year: 2000}; })
         .then(p(updateDetail, detail))
     ;
 
-    d3.selectAll('.year').on('mouseenter', function () {
-        var year = this.getAttribute('value');
+    function updateYear(year) {
         repo
             .tracksOfYear(year)
             .then(function (tracks) { return {tracks: tracks, year: year}; })
             .then(p(updateDetail, detail))
         ;
-    });
+    }
 
     function createOverview(width, height) {
         // Dimensions of the chart.
-        var margin = {top: 20, right: 50, bottom: 30, left: 20};
+        var margin = {top: 30, right: 20, bottom: 20, left: 50};
         width -= (margin.left + margin.right);
         height -= (margin.top + margin.bottom);
 
@@ -34,53 +33,60 @@
         var grid = svg
             .append("g")
             .attr('class', 'grid')
+            .attr('transform', translate(margin.left, margin.top))
         ;
 
         // Adds the x-axis
-        grid.append("g")
+        svg.append("g")
             .attr('class', 'x-axis')
-            .attr('transform', 'translate(0,' + height + ')')
+            .attr('transform', translate(margin.left, margin.top))
         ;
 
         // Adds the y-axis.
-        grid.append("g")
+        svg.append("g")
             .attr('class', 'y-axis')
-            .attr('transform', 'translate(' + width + ', 0)')
+            .attr('transform', translate(margin.left, margin.top))
         ;
 
         return {
             svg: svg,
             x: d3.scaleLinear().range([0, width]),
-            y: d3.scaleLinear().range([height, 0])
+            y: d3.scaleLinear().range([0, height])
         };
     }
 
     function updateOverview(chart, pairs) {
         // Scale the range of the data
-        chart.x.domain(d3.extent(pairs, function(d) { return d.year; }));
-        chart.y.domain([
-            d3.min(pairs, function(d) { return d.popularity - 2; }),
-            d3.max(pairs, function(d) { return d.popularity + 2; })
+        chart.y.domain(d3.extent(pairs, function(d) { return d.year; }));
+        chart.x.domain([
+            d3.min(pairs, function(d) { return d.energy - 0.01; }),
+            d3.max(pairs, function(d) { return d.energy + 0.01; })
         ]);
 
         // define the line
         var valueLine = d3.line()
-            .x(function(d) { return chart.x(d.year); })
-            .y(function(d) { return chart.y(d.popularity); })
+            .y(function(d) { return chart.y(d.year); })
+            .x(function(d) { return chart.x(d.energy); })
         ;
 
-        chart
-          .svg
-          .selectAll('.grid')
-          .append('path')
-          .datum(pairs)
-          .attr('class', 'line')
-          .attr('d', valueLine)
-        ;
+        var container = chart.svg.select('.grid');
+
+        var itemsOld = container.selectAll('.year-item').data(pairs);
+        var itemsDel = itemsOld.exit();
+        var itemsNew = itemsOld.enter();
+
+        itemsNew = itemsNew.append('circle').attr('class', 'year-item');
+
+        var itemsAll = itemsOld.merge(itemsNew);
+        itemsAll
+            .attr('r', function (pair) { return (pair.popularity * 0.01) * 30; })
+            .attr('cx', function (pair) { return chart.x(pair.energy); })
+            .attr('cy', function (pair) { return chart.y(pair.year); })
+            .on('click', function (pair) { updateYear(pair.year); })
 
         // Update x-axis and y-axis.
-        chart.svg.selectAll('.x-axis').call(d3.axisBottom(chart.x));
-        chart.svg.selectAll('.y-axis').call(d3.axisRight(chart.y).ticks(5));
+        chart.svg.selectAll('.x-axis').call(d3.axisTop(chart.x).ticks(5));
+        chart.svg.selectAll('.y-axis').call(d3.axisLeft(chart.y).tickFormat(d3.format('d')));
     }
 
     function createDetail(width, height) {
