@@ -72,6 +72,11 @@ body {
   padding-top: 50px; /* same height as the navigation */
 }
 
+.aggregation {
+  position: absolute;
+  z-index: 100;
+}
+
 .overview {
   width: 30%;
   height: 100%;

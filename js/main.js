@@ -13,11 +13,27 @@
         var overview = createOverview(overviewParent);
         var detail = createDetail(detailParent);
 
-        repo.avgByYear(['popularity', 'energy']).then(p(updateOverview, overview, detail));
+        var fetching = repo.avgByYear([
+            'popularity',
+            'energy',
+            'danceability',
+            'tempo',
+            'acousticness',
+            'loudness',
+        ]);
+
+        fetching.then(p(updateOverview, overview, detail, 'tempo'));
         repo.tracksOfYear(2000)
             .then(function (tracks) { return {tracks: tracks, year: 2000}; })
             .then(p(updateDetail, detail))
         ;
+
+        d3.selectAll('.js-aggregation').on('click', function (_, i, selection) {
+            var el = selection[i];
+            var prop = el.getAttribute('data-prop');
+
+            fetching.then(p(updateOverview, overview, detail, prop));
+        });
     }
 
     function updateYear(year, chart) {
@@ -67,18 +83,18 @@
         };
     }
 
-    function updateOverview(chart, detail, pairs) {
+    function updateOverview(chart, detail, prop, pairs) {
         // Scale the range of the data
-        chart.y.domain(d3.extent(pairs, function(d) { return d.year; }));
+        chart.y.domain(d3.extent(pairs, function(d) { return d.year; }).reverse());
         chart.x.domain([
-            d3.min(pairs, function(d) { return d.energy - 0.01; }),
-            d3.max(pairs, function(d) { return d.energy + 0.01; })
+            d3.min(pairs, function(d) { return d[prop] - 0.01; }),
+            d3.max(pairs, function(d) { return d[prop] + 0.01; })
         ]);
 
         // define the line
         var valueLine = d3.line()
             .y(function(d) { return chart.y(d.year); })
-            .x(function(d) { return chart.x(d.energy); })
+            .x(function(d) { return chart.x(d[prop]); })
         ;
 
         var container = chart.svg.select('.grid');
@@ -92,7 +108,7 @@
         var itemsAll = itemsOld.merge(itemsNew);
         itemsAll
             .attr('r', function (pair) { return (pair.popularity * 0.01) * 30; })
-            .attr('cx', function (pair) { return chart.x(pair.energy); })
+            .attr('cx', function (pair) { return chart.x(pair[prop]); })
             .attr('cy', function (pair) { return chart.y(pair.year); })
             .on('click', function (pair) { updateYear(pair.year, detail); })
 
