@@ -290,7 +290,7 @@
                     slider.dispatch('slider-adjusted', {detail: {
                         // Substracting disk center, because it is 50% from
                         // beginning and we're also translating by -50% in CCS.
-                        popularity: Math.round(x.invert(d3.event.y + disk.center.y))
+                        popularity: Math.round(x.invert(d3.event.y + (isWebkit() ? 0 : disk.center.y)))
                     }});
                 })
             )
@@ -526,5 +526,11 @@
         return i * da + 0.5 * (ds + da);
     }
 
+    function isWebkit() {
+        var isChrome = /Chrome/.test(w.navigator.userAgent) && /Google Inc/.test(w.navigator.vendor);
+        var isSafari = /Safari/.test(w.navigator.userAgent) && /Apple Computer/.test(w.navigator.vendor);
+
+        return isChrome || isSafari;
+    }
 
 })(d3, window);
