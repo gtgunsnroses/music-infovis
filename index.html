@@ -21,15 +21,32 @@
 
 <div class="container">
   <div class="aggregation">
+    <div class="js-aggregation selected" data-prop="loudness">Loudness</div>
+    <div class="js-aggregation" data-prop="energy">Energy</div>
     <div class="js-aggregation" data-prop="danceability">Danceability</div>
     <div class="js-aggregation" data-prop="acousticness">Acousticness</div>
-    <div class="js-aggregation selected" data-prop="tempo">Tempo</div>
-    <div class="js-aggregation" data-prop="loudness">Loudness</div>
-    <div class="js-aggregation" data-prop="energy">Energy</div>
+    <div class="js-aggregation" data-prop="tempo">Tempo</div>
   </div>
 
   <div id="overview" class="overview"></div>
   <div id="detail" class="detail"></div>
+</div>
+
+<div id='year-detail'>
+  <div id='year'></div>
+  <div class='row'>
+    <span class='label'>Energy</span>
+    <span id='year-energy'></span>
+  </div>
+  <div class='row'>
+    <span class='label'>Tempo</span>
+    <span id='year-tempo'></span>
+  </div>
+  <div class='row'>
+    <span class='label'>Danceability</span>
+    <span id='year-danceability'></span>
+  </div>
+  <div id='click-prompt'>Above statistics are average of the top 100 songs.</div>
 </div>
 
 <div id='song-detail'>
@@ -47,7 +64,7 @@
     <span class='label'>Tempo</span>
     <span id='tempo'></span>
   </div>
-  <div id='click-prompt'>Click to listen <i class="fa fa-headphones" aria-hidden="true"></i></div>
+  <div id='click-prompt'>Click to listen &nbsp; <i class="fa fa-headphones" aria-hidden="true"></i></div>
 </div>
 
 <!-- The src will be filled at runtime -->

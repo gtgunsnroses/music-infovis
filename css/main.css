@@ -314,7 +314,7 @@ body {
   margin-bottom: 0.2rem;
 }
 
-#song-detail.detail-show {
+.detail-show {
   display: block !important;
 }
 
@@ -342,6 +342,24 @@ body {
   margin-top: 1rem;
   color: #FAA5A5;
   font-style: italic;
+}
+
+#year-detail {
+  display: none;
+  position: absolute;
+  width: 12rem;
+  background-color: #433F5F;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.6rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.2rem;
+}
+
+#year {
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
 }
 
 .player-control-play {
@@ -423,4 +441,9 @@ body {
 .selection-line {
   stroke: var(--grey);
   stroke-width: 0.5px;
+}
+
+.year-label {
+  fill: #FAA5A5;
+  font-weight: 600;
 }

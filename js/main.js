@@ -143,6 +143,26 @@
 
                 updateYear(pair.year, detail);
             })
+            .on('mouseenter', function(pair, i, itemsAll) {
+                $('#year').empty()
+                $('#year').append(pair.year)
+                $('#year-energy').empty()
+                $('#year-energy').append(pair.energy.toFixed(2))
+                $('#year-tempo').empty()
+                $('#year-tempo').append(pair.tempo.toFixed(2))
+                $('#year-danceability').empty()
+                $('#year-danceability').append(pair.danceability.toFixed(2))
+                $('#year-detail').addClass('detail-show')
+                $(document).on('mousemove', function(e){
+                    $('#year-detail').css({
+                       left:  e.pageX,
+                       top:   e.pageY + 30
+                    });
+                });
+            })
+            .on('mouseout', function(pair, i, itemsAll) {
+                $('#year-detail').removeClass('detail-show')
+            })
             .transition()
             .duration(750)
             .attr('cx', function (pair) { return chart.x(pair[prop]); })
@@ -155,6 +175,7 @@
     }
 
     function createDetail(parent) {
+        console.log(parent)
         var width = parent.node().getBoundingClientRect().width;
         var height = parent.node().getBoundingClientRect().height;
 
@@ -188,6 +209,14 @@
             .attr('points', v1_x + ',' + v1_y + ' ' + v2_x + ',' + v2_y + ' ' + v3_x + ',' + v3_y)
             .attr('class', 'triangle')
 
+        svg
+            .append('text')
+            .attr('class', 'year-label')
+            .text('2000')
+            .attr('text-anchor', 'middle')
+            .attr('x', 0.5 * width)
+            .attr('y', 0.11 * height)
+
 
 
         var chart = {
@@ -213,8 +242,10 @@
         var popFilter = svg
             .append('path')
             .attr('class', 'popularity-filter')
+            .attr('stroke', '#b1b1b1')
+            .attr('stroke-opacity', '0.2')
             .attr('fill', '#D9558A')
-            .attr('fill-opacity', '0.25')
+            .attr('fill-opacity', '0.1')
             .attr('transform', translate(chart.popularityDisk.center.x, chart.popularityDisk.center.y))
         ;
 
@@ -439,6 +470,10 @@
 
         var itemsAll = itemsOld.merge(itemsNew);
 
+        $('.year-label').empty()
+        $('.year-label').append(year)
+
+
         itemsAll
             .select('.circle-container')
             .attr('transform', function (track, i) {return 'translate(' + xFn(track, i) + ',' + yFn(track, i) + ')'})
@@ -447,6 +482,7 @@
         itemsAll
             .select('.circle')
             .attr('r', rFn)
+            .attr('stroke-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .attr('class', function(track, i) {
                 var circleClass = 'circle';
                 var vibrateFrequency = (function(value){
@@ -524,6 +560,10 @@
             itemsAll
                 .select('.popularity')
                 .attr('fill-opacity', p(updateOpacity, d3.event.detail.popularity))
+
+            itemsAll
+                .select('.circle')
+                .attr('stroke-opacity', p(updateOpacity, d3.event.detail.popularity))
             ;
         });
 
