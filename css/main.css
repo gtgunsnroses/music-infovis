@@ -1,12 +1,21 @@
 
-
+:root {
+  --grey: #b1b1b1;
+  --light: #fff;
+}
 
 body {
 	display: block;
 	margin: 0;
 	height: 100%;
-  background-color: #433F5F;
-  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #383354;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: auto;
+  font-size: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 .axis path,
@@ -19,7 +28,7 @@ body {
 .head-nav {
   width: 100%;
   height: 50px;
-  background-color: #35324c;
+  background-color: #2E2A48;
   position: fixed;
   top: 0;
   left: 0;
@@ -109,6 +118,10 @@ body {
   transform: translateY(-50%);
 }
 
+.detail-background {
+  fill: #443F5F;
+}
+
 
 .line {
     fill: none;
@@ -119,6 +132,7 @@ body {
 .circle {
     fill: none;
     stroke: #b1b1b1;
+    stroke-width: 0.5px;
     animation-iteration-count: infinite;
 }
 
@@ -129,11 +143,11 @@ body {
 .rank {
     text-anchor: middle;
     font-size: 10pt;
-    fill: #FFFFFF;
+    fill: var(--grey);
 }
 
 .pop-slider-track {
-    stroke: #FFF;
+    stroke: var(--grey);
     stroke-width: 2px;
 }
 
@@ -146,26 +160,26 @@ body {
 }
 
 .pop-slider-knob {
-    stroke: #FFFFFF;
-    fill: #433F5F;
+    stroke: #fff;
+    fill: var(--light);
     stroke-width: 2px;
 }
 
 .pop-slider-knob-text {
-    fill: #FFFFFF;
+    fill: var(--light);
     font-size: 10pt;
 }
 
 .pop-slider-max {
-    fill: #FFF;
+    fill: var(--grey);
 }
 
 .pop-slider-min {
-    fill: #FFF;
+    fill: var(--grey);
 }
 
 .pop-slider-mid {
-    fill: #FFF;
+    fill: var(--grey);
 }
 
 .pop-slider-txt {
@@ -354,12 +368,12 @@ body {
 .y-axis line,
 .x-axis path,
 .y-axis path {
-  stroke: #FFFFFF;
+  stroke: var(--grey);
 }
 
 .x-axis text,
 .y-axis text {
-  fill: #FFFFFF;
+  fill: var(--grey);
 }
 
 .popularity {

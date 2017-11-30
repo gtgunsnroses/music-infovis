@@ -166,6 +166,16 @@
             .attr("height", height)
         ;
 
+        svg
+            .append('rect')
+            .attr('class', 'detail-background')
+            .attr('x', 0.02 * width)
+            .attr('y', 0.02 * height)
+            .attr('width', 0.96 * width)
+            .attr('height', 0.96 * height)
+            .attr('rx', 15)
+            .attr('ry', 15)
+
         var chart = {
             svg: svg,
             popularityDisk: {
@@ -209,6 +219,7 @@
             .append('g')
             .attr('class', 'detail-container')
         ;
+
 
         return chart;
     }
