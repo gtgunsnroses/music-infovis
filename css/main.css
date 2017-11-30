@@ -9,11 +9,12 @@ body {
 	margin: 0;
 	height: 100%;
   background-color: #383354;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-smooth: auto;
   font-size: 100%;
+  font-weight: 400;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   overflow: hidden;
 }
@@ -36,9 +37,8 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-weight: 300;
   color: #b1b1b1;
-  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);*/
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .head-nav > div {
@@ -68,7 +68,7 @@ body {
 
 .logo-img {
   height: 17px;
-  margin: 0 20px;
+  margin: 0 30px;
 }
 
 .container {
@@ -84,14 +84,16 @@ body {
 .aggregation {
   position: absolute;
   z-index: 100;
+  margin-left: 40px;
+  margin-top: 10px
 }
 
 .overview {
-  width: 30%;
-  height: calc(100% - 57px);
+  width: 35%;
+  height: calc(100% - 60px);
   float: left;
   position: relative;
-  padding-top: 57px; /* to make room for aggregation selection */
+  padding-top: 60px; /* to make room for aggregation selection */
 }
 
 .overview > svg {
@@ -101,7 +103,7 @@ body {
 }
 
 .detail {
-  width: 69%;
+  width: 64%;
   height: 100%;
   float: left;
   position: relative;
@@ -120,6 +122,10 @@ body {
 
 .detail-background {
   fill: #443F5F;
+}
+
+.triangle {
+  fill: #443f5f;
 }
 
 
@@ -299,7 +305,7 @@ body {
 #song-detail {
   display: none;
   position: absolute;
-  width: 15rem;
+  width: 12rem;
   background-color: #433F5F;
   color: #fff;
   border-radius: 5px;
@@ -335,6 +341,7 @@ body {
 #click-prompt {
   margin-top: 1rem;
   color: #FAA5A5;
+  font-style: italic;
 }
 
 .player-control-play {
@@ -391,19 +398,29 @@ body {
   color: #FAA5A5;
   cursor: pointer;
   float: left;
-  font-weight: 700;
   padding: 0.5em;
+  font-size: 14px;
+}
+
+.aggregation > *:first-child {
+  border-radius: 3px 0 0 3px;
 }
 
 .aggregation > *:last-child {
   border-right: 1px solid #FAA5A5;
+  border-radius: 0 3px 3px 0;
 }
 
 .aggregation > *.selected {
-  background-color: #FAA5A5;
+  background-color: #FAA5A5 !important;
   color: #433F5F;
 }
 
+.aggregation > div:hover {
+  background-color: rgba(250, 165, 165, 0.12);
+}
+
 .selection-line {
-  stroke: #FAA5A5;
+  stroke: var(--grey);
+  stroke-width: 0.5px;
 }

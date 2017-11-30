@@ -176,6 +176,20 @@
             .attr('rx', 15)
             .attr('ry', 15)
 
+        var v1_x = 0.02 * width
+        var v1_y = 0.5 * height - 20
+        var v2_x = 0.02 * width
+        var v2_y = 0.5 * height + 20
+        var v3_x = 0
+        var v3_y = 0.5 * height
+
+        svg
+            .append('polygon')
+            .attr('points', v1_x + ',' + v1_y + ' ' + v2_x + ',' + v2_y + ' ' + v3_x + ',' + v3_y)
+            .attr('class', 'triangle')
+
+
+
         var chart = {
             svg: svg,
             popularityDisk: {
