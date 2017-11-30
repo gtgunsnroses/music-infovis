@@ -128,8 +128,6 @@
         var itemsAll = itemsOld.merge(itemsNew);
         itemsAll
             .attr('r', function (pair) { return radius(pair.popularity); })
-            .attr('cx', function (pair) { return chart.x(pair[prop]); })
-            .attr('cy', function (pair) { return chart.y(pair.year); })
             .on('click', function (pair, i, itemsAll) {
                 d3.selectAll(itemsAll).classed('selected', false);
                 d3.select(itemsAll[i]).classed('selected', true);
@@ -145,6 +143,11 @@
 
                 updateYear(pair.year, detail);
             })
+            .transition()
+            .duration(750)
+            .attr('cx', function (pair) { return chart.x(pair[prop]); })
+            .attr('cy', function (pair) { return chart.y(pair.year); })
+        ;
 
         // Update x-axis and y-axis.
         chart.svg.selectAll('.x-axis').call(d3.axisTop(chart.x).ticks(5));
