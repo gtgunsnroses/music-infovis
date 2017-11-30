@@ -20,6 +20,7 @@
             'tempo',
             'acousticness',
             'loudness',
+            'popularity'
         ]);
 
         fetching.then(p(updateOverview, overview, detail, 'tempo'));
@@ -31,6 +32,9 @@
         d3.selectAll('.js-aggregation').on('click', function (_, i, selection) {
             var el = selection[i];
             var prop = el.getAttribute('data-prop');
+
+            d3.selectAll(selection).classed('selected', false);
+            d3.select(el).classed('selected', true);
 
             fetching.then(p(updateOverview, overview, detail, prop));
         });
@@ -46,7 +50,7 @@
 
     function createOverview(parent) {
         var width = parent.node().getBoundingClientRect().width;
-        var height = parent.node().getBoundingClientRect().height;
+        var height = $(parent.node()).height();
 
         // Dimensions of the chart.
         var margin = {top: 30, right: 20, bottom: 20, left: 50};
@@ -91,6 +95,11 @@
             d3.max(pairs, function(d) { return d[prop] + 0.01; })
         ]);
 
+        var radius = d3.scaleLinear().range([5, 20]).domain([
+            d3.min(pairs, function(d) { return d.popularity; }),
+            d3.max(pairs, function(d) { return d.popularity; })
+        ]);
+
         // define the line
         var valueLine = d3.line()
             .y(function(d) { return chart.y(d.year); })
@@ -107,7 +116,7 @@
 
         var itemsAll = itemsOld.merge(itemsNew);
         itemsAll
-            .attr('r', function (pair) { return (pair.popularity * 0.01) * 30; })
+            .attr('r', function (pair) { return radius(pair.popularity); })
             .attr('cx', function (pair) { return chart.x(pair[prop]); })
             .attr('cy', function (pair) { return chart.y(pair.year); })
             .on('click', function (pair) { updateYear(pair.year, detail); })

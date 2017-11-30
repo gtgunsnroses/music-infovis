@@ -79,9 +79,10 @@ body {
 
 .overview {
   width: 30%;
-  height: 100%;
+  height: calc(100% - 57px);
   display: inline-block;
   position: relative;
+  padding-top: 57px; /* to make room for aggregation selection */
 }
 
 .overview > svg {
@@ -356,4 +357,28 @@ body {
 
 .popularity {
   cursor: pointer
+}
+
+.aggregation {
+  padding: 10px;
+}
+
+.aggregation > * {
+  border-bottom: 1px solid #FAA5A5;
+  border-left: 1px solid #FAA5A5;
+  border-top: 1px solid #FAA5A5;
+  color: #FAA5A5;
+  cursor: pointer;
+  float: left;
+  font-weight: 700;
+  padding: 0.5em;
+}
+
+.aggregation > *:last-child {
+  border-right: 1px solid #FAA5A5;
+}
+
+.aggregation > *.selected {
+  background-color: #FAA5A5;
+  color: #433F5F;
 }
