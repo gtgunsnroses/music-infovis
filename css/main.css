@@ -80,7 +80,7 @@ body {
 .overview {
   width: 30%;
   height: calc(100% - 57px);
-  display: inline-block;
+  float: left;
   position: relative;
   padding-top: 57px; /* to make room for aggregation selection */
 }
@@ -94,7 +94,7 @@ body {
 .detail {
   width: 69%;
   height: 100%;
-  display: inline-block;
+  float: left;
   position: relative;
 }
 
