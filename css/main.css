@@ -343,6 +343,13 @@ body {
   cursor: pointer;
 }
 
+.year-item.selected {
+  fill: rgba(250, 165, 165, 0.25);
+  stroke: #FAA5A5;
+  cursor: default;
+  fill: rgba();
+}
+
 .x-axis line,
 .y-axis line,
 .x-axis path,
@@ -381,4 +388,8 @@ body {
 .aggregation > *.selected {
   background-color: #FAA5A5;
   color: #433F5F;
+}
+
+.selection-line {
+  stroke: #FAA5A5;
 }

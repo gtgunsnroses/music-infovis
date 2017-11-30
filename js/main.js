@@ -68,6 +68,13 @@
             .attr('transform', translate(margin.left, margin.top))
         ;
 
+        grid
+            .append('line')
+            .attr('class', 'selection-line')
+            .attr('x1', 0)
+            .attr('x2', width)
+        ;
+
         // Adds the x-axis
         svg.append("g")
             .attr('class', 'x-axis')
@@ -89,7 +96,11 @@
 
     function updateOverview(chart, detail, prop, pairs) {
         // Scale the range of the data
-        chart.y.domain(d3.extent(pairs, function(d) { return d.year; }).reverse());
+        var yExtent = d3.extent(pairs, function(d) { return +d.year; }).reverse();
+        yExtent[0] += 1;
+        yExtent[1] -= 1;
+
+        chart.y.domain(yExtent);
         chart.x.domain([
             d3.min(pairs, function(d) { return d[prop] - 0.01; }),
             d3.max(pairs, function(d) { return d[prop] + 0.01; })
@@ -119,7 +130,21 @@
             .attr('r', function (pair) { return radius(pair.popularity); })
             .attr('cx', function (pair) { return chart.x(pair[prop]); })
             .attr('cy', function (pair) { return chart.y(pair.year); })
-            .on('click', function (pair) { updateYear(pair.year, detail); })
+            .on('click', function (pair, i, itemsAll) {
+                d3.selectAll(itemsAll).classed('selected', false);
+                d3.select(itemsAll[i]).classed('selected', true);
+
+                var line = d3.select('.selection-line');
+
+                line
+                    .transition()
+                    .duration(1000)
+                    .attr('y1', chart.y(pair.year))
+                    .attr('y2', chart.y(pair.year))
+                ;
+
+                updateYear(pair.year, detail);
+            })
 
         // Update x-axis and y-axis.
         chart.svg.selectAll('.x-axis').call(d3.axisTop(chart.x).ticks(5));
