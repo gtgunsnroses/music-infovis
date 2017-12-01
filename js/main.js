@@ -177,7 +177,6 @@
     }
 
     function createDetail(parent) {
-        console.log(parent)
         var width = parent.node().getBoundingClientRect().width;
         var height = parent.node().getBoundingClientRect().height;
 
@@ -274,12 +273,28 @@
     function createPlayer(parent, disk) {
         var player = parent
             .append('g')
-            .attr('transform', translate(disk.center.x - 15, disk.center.y - 15))
+            .attr('transform', translate(disk.center.x - 50, disk.center.y - 50))
+        ;
+
+        player
+            .append('defs')
+            .append('clipPath')
+            .attr('id', 'player-art-clip')
+            .append('circle')
+            .attr('r', 50)
+            .attr('cx', 50)
+            .attr('cy', 50)
+        ;
+
+        var artContainer = player
+            .append('g')
+            .attr('class', 'player-art-container')
         ;
 
         var playBtn = player
             .append('g')
             .attr('class', 'player-control-play')
+            .attr('transform', translate(35, 35))
             .classed('player-control-visible', true)
             .on('click', play)
         ;
@@ -292,6 +307,7 @@
         var pauseBtn = player
             .append('g')
             .attr('class', 'player-control-pause')
+            .attr('transform', translate(35, 35))
             .classed('player-control-visible', true)
             .on('click', pause)
         ;
@@ -589,6 +605,19 @@
         if (!track.preview) {
             pause();
         }
+
+        d3
+            .select('.player-art-container')
+            .html('')
+            .append('image')
+            .attr('opacity', '0.4')
+            .attr('x', '0')
+            .attr('y', '0')
+            .attr('width', '100')
+            .attr('height', '100')
+            .attr('clip-path', 'url(#player-art-clip)')
+            .attr('xlink:href', track.image)
+        ;
 
         d3.select('#player').attr('src', track.preview);
         play();
