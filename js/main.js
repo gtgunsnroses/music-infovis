@@ -1,10 +1,29 @@
 (function (d3, w) {
     'use strict';
 
+
     var repo = w.repository('data/everything-final.csv');
 
     redraw();
     w.addEventListener('resize', w.throttle(redraw, 200));
+
+    init()
+
+    function init() {
+        $('#help-btn').on('click', function() {
+            console.log('click')
+            $('#help').toggleClass('help-container--hidden')
+            $('#help-btn').toggleClass('help-btn--hidden')
+            $('#main-vis').toggleClass('main-vis--blur')
+        })
+
+        $('#close-btn').on('click', function() {
+            console.log('click')
+            $('#help').toggleClass('help-container--hidden')
+            $('#help-btn').toggleClass('help-btn--hidden')
+            $('#main-vis').toggleClass('main-vis--blur')
+        })
+    }
 
     function redraw() {
         var overviewParent = d3.select('#overview').html('');
@@ -23,6 +42,7 @@
             'popularity'
         ]);
 
+
         fetching.then(p(updateOverview, overview, detail, 'loudness'));
         repo.tracksOfYear(2000)
             .then(function (tracks) { return {tracks: tracks, year: 2000}; })
@@ -38,6 +58,7 @@
 
             fetching.then(p(updateOverview, overview, detail, prop));
         });
+
     }
 
     function updateYear(year, chart) {
@@ -156,10 +177,19 @@
                 $('#year-danceability').append(pair.danceability.toFixed(2))
                 $('#year-detail').addClass('detail-show')
                 $(document).on('mousemove', function(e){
-                    $('#year-detail').css({
-                       left:  e.pageX,
-                       top:   e.pageY + 30
-                    });
+                    if (e.pageY + 30 + $('#year-detail').height() > $(window).height()) {
+                        $('#year-detail').css({
+                           left:  e.pageX,
+                           top:   e.pageY - $('#year-detail').height() - 30
+                        });
+                    }
+
+                    else {
+                        $('#year-detail').css({
+                           left:  e.pageX,
+                           top:   e.pageY + 30
+                        });
+                    }
                 });
             })
             .on('mouseout', function(pair, i, itemsAll) {
@@ -535,10 +565,19 @@
                 $('#popularity').append(track.popularity)
                 $('#rank-num').append(track.rank)
                 $(document).on('mousemove', function(e){
-                    $('#song-detail').css({
-                       left:  e.pageX,
-                       top:   e.pageY + 30
-                    });
+                    if (e.pageY + 30 + $('#song-detail').height() > $(window).height()) {
+                        $('#song-detail').css({
+                           left:  e.pageX,
+                           top:   e.pageY - $('#song-detail').height() - 30
+                        });
+                    }
+
+                    else {
+                        $('#song-detail').css({
+                           left:  e.pageX,
+                           top:   e.pageY + 30
+                        });
+                    }
                 });
                 return arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
             })
