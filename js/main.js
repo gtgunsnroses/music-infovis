@@ -146,6 +146,8 @@
             .on('mouseenter', function(pair, i, itemsAll) {
                 $('#year').empty()
                 $('#year').append(pair.year)
+                $('#year-popularity').empty()
+                $('#year-popularity').append(pair.popularity.toFixed(2))
                 $('#year-energy').empty()
                 $('#year-energy').append(pair.energy.toFixed(2))
                 $('#year-tempo').empty()
@@ -515,17 +517,22 @@
             .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .on('click', changeTrackAndPlay)
             .on('mouseenter', function(track, i) {
+                console.log(track)
                 $('#song-name').empty()
                 $('#song-artist').empty()
                 $('#energy').empty()
                 $('#danceability').empty()
                 $('#tempo').empty()
+                $('#popularity').empty()
+                $('#rank-num').empty()
                 $('#song-detail').addClass('detail-show')
                 $('#song-name').append(track.name)
                 $('#song-artist').append(track.artist)
                 $('#energy').append(track.energy);
                 $('#danceability').append(track.danceability)
-                $('#tempo').append(track.tempo);
+                $('#tempo').append(track.tempo)
+                $('#popularity').append(track.popularity)
+                $('#rank-num').append(track.rank)
                 $(document).on('mousemove', function(e){
                     $('#song-detail').css({
                        left:  e.pageX,

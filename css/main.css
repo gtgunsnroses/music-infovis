@@ -323,15 +323,18 @@ body {
   font-size: 1.3rem;
 }
 
+#song-rank {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
 #song-artist {
   font-weight: 500;
   color: #b1afaf;
   margin-bottom: 1rem;
 }
 
-.label {
-  width: 5rem;
-}
+
 
 .row {
   display: flex;
@@ -445,5 +448,6 @@ body {
 
 .year-label {
   fill: #FAA5A5;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 20px;
 }
