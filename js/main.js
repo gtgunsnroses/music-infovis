@@ -23,7 +23,7 @@
             'popularity'
         ]);
 
-        fetching.then(p(updateOverview, overview, detail, 'tempo'));
+        fetching.then(p(updateOverview, overview, detail, 'loudness'));
         repo.tracksOfYear(2000)
             .then(function (tracks) { return {tracks: tracks, year: 2000}; })
             .then(p(updateDetail, detail))
