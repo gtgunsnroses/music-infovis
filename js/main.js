@@ -1,7 +1,7 @@
 (function (d3, w) {
     'use strict';
 
-    var repo = w.repository('data/everything.csv');
+    var repo = w.repository('data/everything-final.csv');
 
     redraw();
     w.addEventListener('resize', w.throttle(redraw, 200));
@@ -586,11 +586,11 @@
     }
 
     function changeTrackAndPlay(track) {
-        d3
-            .select('#player')
-            .attr('src', 'https://p.scdn.co/mp3-preview/15f78fd0c74a576cddb1362fd8dae43b984b37a2?cid=b1f28da8553c44beb65edac3ed1abac7')
-        ;
+        if (!track.preview) {
+            pause();
+        }
 
+        d3.select('#player').attr('src', track.preview);
         play();
     }
 

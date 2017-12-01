@@ -108,10 +108,16 @@
      * @return {Array}
      */
     function tracksOfYear(year, table) {
-        return table
+        var tracks = table
             .filter(function (row) { return String(row.year) === String(year); })
             .filter(function (row) { return row.popularity !== ''; })
         ;
+
+        tracks.sort(function (a, b) {
+            return a.rank - b.rank;
+        });
+
+        return tracks;
     }
 
     function sum(a, b) { return a + b; }
