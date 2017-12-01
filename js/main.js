@@ -473,7 +473,7 @@
         var cx = chart.popularityDisk.center.x;
         var cy = chart.popularityDisk.center.y;
 
-        var rFn = function (track) { return 8; };
+        var rFn = function (track) { return 6; };
         var xFn = function (track, i) { return cx + 0.4 * width * Math.cos(angle(da, ds, i) - 0.5 * Math.PI); };
         var yFn = function (track, i) { return cy + 0.4 * width * Math.sin(angle(da, ds, i) - 0.5 * Math.PI); };
 
@@ -502,26 +502,11 @@
             .attr('r', rFn)
             .attr('stroke-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .attr('class', function(track, i) {
-                var circleClass = 'circle';
-                var vibrateFrequency = (function(value){
-                    var index = null
-                    if (value < 50) index = 1;
-                    else if (value >= 50 && value < 90) index = 2;
-                    else if (value >= 90 && value < 130) index = 3;
-                    else if (value >= 130 && value < 170) index = 4;
-                    else {index = 5;}
-                    return 'vibrate-frequency-' + index
-                })(track.tempo)
-                var vibrateSize = (function(value){
-                    var index = null;
-                    if (value < 0.2) index = 1;
-                    else if (value >= 0.2 && value < 0.4) index = 2;
-                    else if (value >= 0.4 && value < 0.6) index = 3;
-                    else if (value >= 0.6 && value < 0.8) index = 4;
-                    else {index = 5;}
-                    return 'vibrate-size-' + index
-                })(track.energy)
-                return circleClass + ' ' + vibrateFrequency + ' ' + vibrateSize
+                return [
+                    'circle',
+                    'vibrate-frequency-' + Math.round(track.tempo),
+                    'vibrate-size-' + Math.round(track.energy * 100)
+                ].join(' ');
             })
         ;
 

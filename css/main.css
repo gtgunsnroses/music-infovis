@@ -192,115 +192,422 @@ body {
     font-size: 8pt;
 }
 
-.vibrate-frequency-1 {
-  animation-duration: 1.5s
-}
+/**
+ * Auto-generated.
+ *
+ * for (var i = 30; i < 200; i++) {
+ *    console.log('.vibrate-frequency-' + i + ' { animation-duration: ' + (60.0 / i) + 's; }');
+ * }
+ */
+.vibrate-frequency-30 { animation-duration: 2s; }
+.vibrate-frequency-31 { animation-duration: 1.935483870967742s; }
+.vibrate-frequency-32 { animation-duration: 1.875s; }
+.vibrate-frequency-33 { animation-duration: 1.8181818181818181s; }
+.vibrate-frequency-34 { animation-duration: 1.7647058823529411s; }
+.vibrate-frequency-35 { animation-duration: 1.7142857142857142s; }
+.vibrate-frequency-36 { animation-duration: 1.6666666666666667s; }
+.vibrate-frequency-37 { animation-duration: 1.6216216216216217s; }
+.vibrate-frequency-38 { animation-duration: 1.5789473684210527s; }
+.vibrate-frequency-39 { animation-duration: 1.5384615384615385s; }
+.vibrate-frequency-40 { animation-duration: 1.5s; }
+.vibrate-frequency-41 { animation-duration: 1.4634146341463414s; }
+.vibrate-frequency-42 { animation-duration: 1.4285714285714286s; }
+.vibrate-frequency-43 { animation-duration: 1.3953488372093024s; }
+.vibrate-frequency-44 { animation-duration: 1.3636363636363635s; }
+.vibrate-frequency-45 { animation-duration: 1.3333333333333333s; }
+.vibrate-frequency-46 { animation-duration: 1.3043478260869565s; }
+.vibrate-frequency-47 { animation-duration: 1.2765957446808511s; }
+.vibrate-frequency-48 { animation-duration: 1.25s; }
+.vibrate-frequency-49 { animation-duration: 1.2244897959183674s; }
+.vibrate-frequency-50 { animation-duration: 1.2s; }
+.vibrate-frequency-51 { animation-duration: 1.1764705882352942s; }
+.vibrate-frequency-52 { animation-duration: 1.1538461538461537s; }
+.vibrate-frequency-53 { animation-duration: 1.1320754716981132s; }
+.vibrate-frequency-54 { animation-duration: 1.1111111111111112s; }
+.vibrate-frequency-55 { animation-duration: 1.0909090909090908s; }
+.vibrate-frequency-56 { animation-duration: 1.0714285714285714s; }
+.vibrate-frequency-57 { animation-duration: 1.0526315789473684s; }
+.vibrate-frequency-58 { animation-duration: 1.0344827586206897s; }
+.vibrate-frequency-59 { animation-duration: 1.0169491525423728s; }
+.vibrate-frequency-60 { animation-duration: 1s; }
+.vibrate-frequency-61 { animation-duration: 0.9836065573770492s; }
+.vibrate-frequency-62 { animation-duration: 0.967741935483871s; }
+.vibrate-frequency-63 { animation-duration: 0.9523809523809523s; }
+.vibrate-frequency-64 { animation-duration: 0.9375s; }
+.vibrate-frequency-65 { animation-duration: 0.9230769230769231s; }
+.vibrate-frequency-66 { animation-duration: 0.9090909090909091s; }
+.vibrate-frequency-67 { animation-duration: 0.8955223880597015s; }
+.vibrate-frequency-68 { animation-duration: 0.8823529411764706s; }
+.vibrate-frequency-69 { animation-duration: 0.8695652173913043s; }
+.vibrate-frequency-70 { animation-duration: 0.8571428571428571s; }
+.vibrate-frequency-71 { animation-duration: 0.8450704225352113s; }
+.vibrate-frequency-72 { animation-duration: 0.8333333333333334s; }
+.vibrate-frequency-73 { animation-duration: 0.821917808219178s; }
+.vibrate-frequency-74 { animation-duration: 0.8108108108108109s; }
+.vibrate-frequency-75 { animation-duration: 0.8s; }
+.vibrate-frequency-76 { animation-duration: 0.7894736842105263s; }
+.vibrate-frequency-77 { animation-duration: 0.7792207792207793s; }
+.vibrate-frequency-78 { animation-duration: 0.7692307692307693s; }
+.vibrate-frequency-79 { animation-duration: 0.759493670886076s; }
+.vibrate-frequency-80 { animation-duration: 0.75s; }
+.vibrate-frequency-81 { animation-duration: 0.7407407407407407s; }
+.vibrate-frequency-82 { animation-duration: 0.7317073170731707s; }
+.vibrate-frequency-83 { animation-duration: 0.7228915662650602s; }
+.vibrate-frequency-84 { animation-duration: 0.7142857142857143s; }
+.vibrate-frequency-85 { animation-duration: 0.7058823529411765s; }
+.vibrate-frequency-86 { animation-duration: 0.6976744186046512s; }
+.vibrate-frequency-87 { animation-duration: 0.6896551724137931s; }
+.vibrate-frequency-88 { animation-duration: 0.6818181818181818s; }
+.vibrate-frequency-89 { animation-duration: 0.6741573033707865s; }
+.vibrate-frequency-90 { animation-duration: 0.6666666666666666s; }
+.vibrate-frequency-91 { animation-duration: 0.6593406593406593s; }
+.vibrate-frequency-92 { animation-duration: 0.6521739130434783s; }
+.vibrate-frequency-93 { animation-duration: 0.6451612903225806s; }
+.vibrate-frequency-94 { animation-duration: 0.6382978723404256s; }
+.vibrate-frequency-95 { animation-duration: 0.631578947368421s; }
+.vibrate-frequency-96 { animation-duration: 0.625s; }
+.vibrate-frequency-97 { animation-duration: 0.6185567010309279s; }
+.vibrate-frequency-98 { animation-duration: 0.6122448979591837s; }
+.vibrate-frequency-99 { animation-duration: 0.6060606060606061s; }
+.vibrate-frequency-100 { animation-duration: 0.6s; }
+.vibrate-frequency-101 { animation-duration: 0.594059405940594s; }
+.vibrate-frequency-102 { animation-duration: 0.5882352941176471s; }
+.vibrate-frequency-103 { animation-duration: 0.5825242718446602s; }
+.vibrate-frequency-104 { animation-duration: 0.5769230769230769s; }
+.vibrate-frequency-105 { animation-duration: 0.5714285714285714s; }
+.vibrate-frequency-106 { animation-duration: 0.5660377358490566s; }
+.vibrate-frequency-107 { animation-duration: 0.5607476635514018s; }
+.vibrate-frequency-108 { animation-duration: 0.5555555555555556s; }
+.vibrate-frequency-109 { animation-duration: 0.5504587155963303s; }
+.vibrate-frequency-110 { animation-duration: 0.5454545454545454s; }
+.vibrate-frequency-111 { animation-duration: 0.5405405405405406s; }
+.vibrate-frequency-112 { animation-duration: 0.5357142857142857s; }
+.vibrate-frequency-113 { animation-duration: 0.5309734513274337s; }
+.vibrate-frequency-114 { animation-duration: 0.5263157894736842s; }
+.vibrate-frequency-115 { animation-duration: 0.5217391304347826s; }
+.vibrate-frequency-116 { animation-duration: 0.5172413793103449s; }
+.vibrate-frequency-117 { animation-duration: 0.5128205128205128s; }
+.vibrate-frequency-118 { animation-duration: 0.5084745762711864s; }
+.vibrate-frequency-119 { animation-duration: 0.5042016806722689s; }
+.vibrate-frequency-120 { animation-duration: 0.5s; }
+.vibrate-frequency-121 { animation-duration: 0.49586776859504134s; }
+.vibrate-frequency-122 { animation-duration: 0.4918032786885246s; }
+.vibrate-frequency-123 { animation-duration: 0.4878048780487805s; }
+.vibrate-frequency-124 { animation-duration: 0.4838709677419355s; }
+.vibrate-frequency-125 { animation-duration: 0.48s; }
+.vibrate-frequency-126 { animation-duration: 0.47619047619047616s; }
+.vibrate-frequency-127 { animation-duration: 0.47244094488188976s; }
+.vibrate-frequency-128 { animation-duration: 0.46875s; }
+.vibrate-frequency-129 { animation-duration: 0.46511627906976744s; }
+.vibrate-frequency-130 { animation-duration: 0.46153846153846156s; }
+.vibrate-frequency-131 { animation-duration: 0.4580152671755725s; }
+.vibrate-frequency-132 { animation-duration: 0.45454545454545453s; }
+.vibrate-frequency-133 { animation-duration: 0.45112781954887216s; }
+.vibrate-frequency-134 { animation-duration: 0.44776119402985076s; }
+.vibrate-frequency-135 { animation-duration: 0.4444444444444444s; }
+.vibrate-frequency-136 { animation-duration: 0.4411764705882353s; }
+.vibrate-frequency-137 { animation-duration: 0.43795620437956206s; }
+.vibrate-frequency-138 { animation-duration: 0.43478260869565216s; }
+.vibrate-frequency-139 { animation-duration: 0.4316546762589928s; }
+.vibrate-frequency-140 { animation-duration: 0.42857142857142855s; }
+.vibrate-frequency-141 { animation-duration: 0.425531914893617s; }
+.vibrate-frequency-142 { animation-duration: 0.4225352112676056s; }
+.vibrate-frequency-143 { animation-duration: 0.4195804195804196s; }
+.vibrate-frequency-144 { animation-duration: 0.4166666666666667s; }
+.vibrate-frequency-145 { animation-duration: 0.41379310344827586s; }
+.vibrate-frequency-146 { animation-duration: 0.410958904109589s; }
+.vibrate-frequency-147 { animation-duration: 0.40816326530612246s; }
+.vibrate-frequency-148 { animation-duration: 0.40540540540540543s; }
+.vibrate-frequency-149 { animation-duration: 0.40268456375838924s; }
+.vibrate-frequency-150 { animation-duration: 0.4s; }
+.vibrate-frequency-151 { animation-duration: 0.3973509933774834s; }
+.vibrate-frequency-152 { animation-duration: 0.39473684210526316s; }
+.vibrate-frequency-153 { animation-duration: 0.39215686274509803s; }
+.vibrate-frequency-154 { animation-duration: 0.38961038961038963s; }
+.vibrate-frequency-155 { animation-duration: 0.3870967741935484s; }
+.vibrate-frequency-156 { animation-duration: 0.38461538461538464s; }
+.vibrate-frequency-157 { animation-duration: 0.3821656050955414s; }
+.vibrate-frequency-158 { animation-duration: 0.379746835443038s; }
+.vibrate-frequency-159 { animation-duration: 0.37735849056603776s; }
+.vibrate-frequency-160 { animation-duration: 0.375s; }
+.vibrate-frequency-161 { animation-duration: 0.37267080745341613s; }
+.vibrate-frequency-162 { animation-duration: 0.37037037037037035s; }
+.vibrate-frequency-163 { animation-duration: 0.36809815950920244s; }
+.vibrate-frequency-164 { animation-duration: 0.36585365853658536s; }
+.vibrate-frequency-165 { animation-duration: 0.36363636363636365s; }
+.vibrate-frequency-166 { animation-duration: 0.3614457831325301s; }
+.vibrate-frequency-167 { animation-duration: 0.3592814371257485s; }
+.vibrate-frequency-168 { animation-duration: 0.35714285714285715s; }
+.vibrate-frequency-169 { animation-duration: 0.35502958579881655s; }
+.vibrate-frequency-170 { animation-duration: 0.35294117647058826s; }
+.vibrate-frequency-171 { animation-duration: 0.3508771929824561s; }
+.vibrate-frequency-172 { animation-duration: 0.3488372093023256s; }
+.vibrate-frequency-173 { animation-duration: 0.3468208092485549s; }
+.vibrate-frequency-174 { animation-duration: 0.3448275862068966s; }
+.vibrate-frequency-175 { animation-duration: 0.34285714285714286s; }
+.vibrate-frequency-176 { animation-duration: 0.3409090909090909s; }
+.vibrate-frequency-177 { animation-duration: 0.3389830508474576s; }
+.vibrate-frequency-178 { animation-duration: 0.33707865168539325s; }
+.vibrate-frequency-179 { animation-duration: 0.33519553072625696s; }
+.vibrate-frequency-180 { animation-duration: 0.3333333333333333s; }
+.vibrate-frequency-181 { animation-duration: 0.3314917127071823s; }
+.vibrate-frequency-182 { animation-duration: 0.32967032967032966s; }
+.vibrate-frequency-183 { animation-duration: 0.32786885245901637s; }
+.vibrate-frequency-184 { animation-duration: 0.32608695652173914s; }
+.vibrate-frequency-185 { animation-duration: 0.32432432432432434s; }
+.vibrate-frequency-186 { animation-duration: 0.3225806451612903s; }
+.vibrate-frequency-187 { animation-duration: 0.32085561497326204s; }
+.vibrate-frequency-188 { animation-duration: 0.3191489361702128s; }
+.vibrate-frequency-189 { animation-duration: 0.31746031746031744s; }
+.vibrate-frequency-190 { animation-duration: 0.3157894736842105s; }
+.vibrate-frequency-191 { animation-duration: 0.31413612565445026s; }
+.vibrate-frequency-192 { animation-duration: 0.3125s; }
+.vibrate-frequency-193 { animation-duration: 0.31088082901554404s; }
+.vibrate-frequency-194 { animation-duration: 0.30927835051546393s; }
+.vibrate-frequency-195 { animation-duration: 0.3076923076923077s; }
+.vibrate-frequency-196 { animation-duration: 0.30612244897959184s; }
+.vibrate-frequency-197 { animation-duration: 0.30456852791878175s; }
+.vibrate-frequency-198 { animation-duration: 0.30303030303030304s; }
+.vibrate-frequency-199 { animation-duration: 0.3015075376884422s; }
+.vibrate-frequency-200 { animation-duration: 0.3s; }
+.vibrate-frequency-201 { animation-duration: 0.29850746268656714s; }
+.vibrate-frequency-202 { animation-duration: 0.297029702970297s; }
+.vibrate-frequency-203 { animation-duration: 0.2955665024630542s; }
+.vibrate-frequency-204 { animation-duration: 0.29411764705882354s; }
+.vibrate-frequency-205 { animation-duration: 0.2926829268292683s; }
+.vibrate-frequency-206 { animation-duration: 0.2912621359223301s; }
+.vibrate-frequency-207 { animation-duration: 0.2898550724637681s; }
+.vibrate-frequency-208 { animation-duration: 0.28846153846153844s; }
+.vibrate-frequency-209 { animation-duration: 0.28708133971291866s; }
+.vibrate-frequency-210 { animation-duration: 0.2857142857142857s; }
+.vibrate-frequency-211 { animation-duration: 0.2843601895734597s; }
+.vibrate-frequency-212 { animation-duration: 0.2830188679245283s; }
+.vibrate-frequency-213 { animation-duration: 0.28169014084507044s; }
+.vibrate-frequency-214 { animation-duration: 0.2803738317757009s; }
+.vibrate-frequency-215 { animation-duration: 0.27906976744186046s; }
+.vibrate-frequency-216 { animation-duration: 0.2777777777777778s; }
+.vibrate-frequency-217 { animation-duration: 0.2764976958525346s; }
+.vibrate-frequency-218 { animation-duration: 0.27522935779816515s; }
+.vibrate-frequency-219 { animation-duration: 0.273972602739726s; }
+.vibrate-frequency-220 { animation-duration: 0.2727272727272727s; }
+.vibrate-frequency-221 { animation-duration: 0.27149321266968324s; }
+.vibrate-frequency-222 { animation-duration: 0.2702702702702703s; }
+.vibrate-frequency-223 { animation-duration: 0.26905829596412556s; }
+.vibrate-frequency-224 { animation-duration: 0.26785714285714285s; }
+.vibrate-frequency-225 { animation-duration: 0.26666666666666666s; }
+.vibrate-frequency-226 { animation-duration: 0.26548672566371684s; }
+.vibrate-frequency-227 { animation-duration: 0.2643171806167401s; }
+.vibrate-frequency-228 { animation-duration: 0.2631578947368421s; }
+.vibrate-frequency-229 { animation-duration: 0.26200873362445415s; }
 
-.vibrate-frequency-2 {
-  animation-duration: 1.2s
-}
-
-.vibrate-frequency-3 {
-  animation-duration: 0.9s
-}
-
-.vibrate-frequency-4 {
-  animation-duration: 0.6s
-}
-
-.vibrate-frequency-5 {
-  animation-duration: 0.3s
-}
-
-.vibrate-size-1 {
-  animation-name: vibrate-size-1;
-}
-
-.vibrate-size-2 {
-  animation-name: vibrate-size-2;
-}
-
-.vibrate-size-3 {
-  animation-name: vibrate-size-3;
-}
-
-.vibrate-size-4 {
-  animation-name: vibrate-size-4;
-}
-
-.vibrate-size-5 {
-  animation-name: vibrate-size-5;
-}
-
-@keyframes vibrate-size-1 {
-  from {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(1.1);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes vibrate-size-2 {
-  from {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(1.3);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes vibrate-size-3 {
-  from {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(1.6);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes vibrate-size-4 {
-  from {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(2.1);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes vibrate-size-5 {
-  from {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(2.9);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
+/**
+ * for (var i = 0; i <= 100; i++) {
+ *    console.log('.vibrate-size-' + i + ' { animation-name: vibrate-size-' + i + '; }');
+ *    console.log('@keyframes vibrate-size-' + i + ' { from { transform: scale(1); } 30% { transform: scale(' + (1 + 2 * Math.pow(0.01 * i, 2)) + '); } to { transform: scale(1); } }');
+ * }
+ */
+.vibrate-size-0 { animation-name: vibrate-size-0; }
+@keyframes vibrate-size-0 { from { transform: scale(1); } 30% { transform: scale(1); } to { transform: scale(1); } }
+.vibrate-size-1 { animation-name: vibrate-size-1; }
+@keyframes vibrate-size-1 { from { transform: scale(1); } 30% { transform: scale(1.0002); } to { transform: scale(1); } }
+.vibrate-size-2 { animation-name: vibrate-size-2; }
+@keyframes vibrate-size-2 { from { transform: scale(1); } 30% { transform: scale(1.0008); } to { transform: scale(1); } }
+.vibrate-size-3 { animation-name: vibrate-size-3; }
+@keyframes vibrate-size-3 { from { transform: scale(1); } 30% { transform: scale(1.0018); } to { transform: scale(1); } }
+.vibrate-size-4 { animation-name: vibrate-size-4; }
+@keyframes vibrate-size-4 { from { transform: scale(1); } 30% { transform: scale(1.0032); } to { transform: scale(1); } }
+.vibrate-size-5 { animation-name: vibrate-size-5; }
+@keyframes vibrate-size-5 { from { transform: scale(1); } 30% { transform: scale(1.005); } to { transform: scale(1); } }
+.vibrate-size-6 { animation-name: vibrate-size-6; }
+@keyframes vibrate-size-6 { from { transform: scale(1); } 30% { transform: scale(1.0072); } to { transform: scale(1); } }
+.vibrate-size-7 { animation-name: vibrate-size-7; }
+@keyframes vibrate-size-7 { from { transform: scale(1); } 30% { transform: scale(1.0098); } to { transform: scale(1); } }
+.vibrate-size-8 { animation-name: vibrate-size-8; }
+@keyframes vibrate-size-8 { from { transform: scale(1); } 30% { transform: scale(1.0128); } to { transform: scale(1); } }
+.vibrate-size-9 { animation-name: vibrate-size-9; }
+@keyframes vibrate-size-9 { from { transform: scale(1); } 30% { transform: scale(1.0162); } to { transform: scale(1); } }
+.vibrate-size-10 { animation-name: vibrate-size-10; }
+@keyframes vibrate-size-10 { from { transform: scale(1); } 30% { transform: scale(1.02); } to { transform: scale(1); } }
+.vibrate-size-11 { animation-name: vibrate-size-11; }
+@keyframes vibrate-size-11 { from { transform: scale(1); } 30% { transform: scale(1.0242); } to { transform: scale(1); } }
+.vibrate-size-12 { animation-name: vibrate-size-12; }
+@keyframes vibrate-size-12 { from { transform: scale(1); } 30% { transform: scale(1.0288); } to { transform: scale(1); } }
+.vibrate-size-13 { animation-name: vibrate-size-13; }
+@keyframes vibrate-size-13 { from { transform: scale(1); } 30% { transform: scale(1.0338); } to { transform: scale(1); } }
+.vibrate-size-14 { animation-name: vibrate-size-14; }
+@keyframes vibrate-size-14 { from { transform: scale(1); } 30% { transform: scale(1.0392); } to { transform: scale(1); } }
+.vibrate-size-15 { animation-name: vibrate-size-15; }
+@keyframes vibrate-size-15 { from { transform: scale(1); } 30% { transform: scale(1.045); } to { transform: scale(1); } }
+.vibrate-size-16 { animation-name: vibrate-size-16; }
+@keyframes vibrate-size-16 { from { transform: scale(1); } 30% { transform: scale(1.0512); } to { transform: scale(1); } }
+.vibrate-size-17 { animation-name: vibrate-size-17; }
+@keyframes vibrate-size-17 { from { transform: scale(1); } 30% { transform: scale(1.0578); } to { transform: scale(1); } }
+.vibrate-size-18 { animation-name: vibrate-size-18; }
+@keyframes vibrate-size-18 { from { transform: scale(1); } 30% { transform: scale(1.0648); } to { transform: scale(1); } }
+.vibrate-size-19 { animation-name: vibrate-size-19; }
+@keyframes vibrate-size-19 { from { transform: scale(1); } 30% { transform: scale(1.0722); } to { transform: scale(1); } }
+.vibrate-size-20 { animation-name: vibrate-size-20; }
+@keyframes vibrate-size-20 { from { transform: scale(1); } 30% { transform: scale(1.08); } to { transform: scale(1); } }
+.vibrate-size-21 { animation-name: vibrate-size-21; }
+@keyframes vibrate-size-21 { from { transform: scale(1); } 30% { transform: scale(1.0882); } to { transform: scale(1); } }
+.vibrate-size-22 { animation-name: vibrate-size-22; }
+@keyframes vibrate-size-22 { from { transform: scale(1); } 30% { transform: scale(1.0968); } to { transform: scale(1); } }
+.vibrate-size-23 { animation-name: vibrate-size-23; }
+@keyframes vibrate-size-23 { from { transform: scale(1); } 30% { transform: scale(1.1058); } to { transform: scale(1); } }
+.vibrate-size-24 { animation-name: vibrate-size-24; }
+@keyframes vibrate-size-24 { from { transform: scale(1); } 30% { transform: scale(1.1152); } to { transform: scale(1); } }
+.vibrate-size-25 { animation-name: vibrate-size-25; }
+@keyframes vibrate-size-25 { from { transform: scale(1); } 30% { transform: scale(1.125); } to { transform: scale(1); } }
+.vibrate-size-26 { animation-name: vibrate-size-26; }
+@keyframes vibrate-size-26 { from { transform: scale(1); } 30% { transform: scale(1.1352); } to { transform: scale(1); } }
+.vibrate-size-27 { animation-name: vibrate-size-27; }
+@keyframes vibrate-size-27 { from { transform: scale(1); } 30% { transform: scale(1.1458); } to { transform: scale(1); } }
+.vibrate-size-28 { animation-name: vibrate-size-28; }
+@keyframes vibrate-size-28 { from { transform: scale(1); } 30% { transform: scale(1.1568); } to { transform: scale(1); } }
+.vibrate-size-29 { animation-name: vibrate-size-29; }
+@keyframes vibrate-size-29 { from { transform: scale(1); } 30% { transform: scale(1.1682); } to { transform: scale(1); } }
+.vibrate-size-30 { animation-name: vibrate-size-30; }
+@keyframes vibrate-size-30 { from { transform: scale(1); } 30% { transform: scale(1.18); } to { transform: scale(1); } }
+.vibrate-size-31 { animation-name: vibrate-size-31; }
+@keyframes vibrate-size-31 { from { transform: scale(1); } 30% { transform: scale(1.1922); } to { transform: scale(1); } }
+.vibrate-size-32 { animation-name: vibrate-size-32; }
+@keyframes vibrate-size-32 { from { transform: scale(1); } 30% { transform: scale(1.2048); } to { transform: scale(1); } }
+.vibrate-size-33 { animation-name: vibrate-size-33; }
+@keyframes vibrate-size-33 { from { transform: scale(1); } 30% { transform: scale(1.2178); } to { transform: scale(1); } }
+.vibrate-size-34 { animation-name: vibrate-size-34; }
+@keyframes vibrate-size-34 { from { transform: scale(1); } 30% { transform: scale(1.2312); } to { transform: scale(1); } }
+.vibrate-size-35 { animation-name: vibrate-size-35; }
+@keyframes vibrate-size-35 { from { transform: scale(1); } 30% { transform: scale(1.245); } to { transform: scale(1); } }
+.vibrate-size-36 { animation-name: vibrate-size-36; }
+@keyframes vibrate-size-36 { from { transform: scale(1); } 30% { transform: scale(1.2591999999999999); } to { transform: scale(1); } }
+.vibrate-size-37 { animation-name: vibrate-size-37; }
+@keyframes vibrate-size-37 { from { transform: scale(1); } 30% { transform: scale(1.2738); } to { transform: scale(1); } }
+.vibrate-size-38 { animation-name: vibrate-size-38; }
+@keyframes vibrate-size-38 { from { transform: scale(1); } 30% { transform: scale(1.2888); } to { transform: scale(1); } }
+.vibrate-size-39 { animation-name: vibrate-size-39; }
+@keyframes vibrate-size-39 { from { transform: scale(1); } 30% { transform: scale(1.3042); } to { transform: scale(1); } }
+.vibrate-size-40 { animation-name: vibrate-size-40; }
+@keyframes vibrate-size-40 { from { transform: scale(1); } 30% { transform: scale(1.32); } to { transform: scale(1); } }
+.vibrate-size-41 { animation-name: vibrate-size-41; }
+@keyframes vibrate-size-41 { from { transform: scale(1); } 30% { transform: scale(1.3362); } to { transform: scale(1); } }
+.vibrate-size-42 { animation-name: vibrate-size-42; }
+@keyframes vibrate-size-42 { from { transform: scale(1); } 30% { transform: scale(1.3528); } to { transform: scale(1); } }
+.vibrate-size-43 { animation-name: vibrate-size-43; }
+@keyframes vibrate-size-43 { from { transform: scale(1); } 30% { transform: scale(1.3698); } to { transform: scale(1); } }
+.vibrate-size-44 { animation-name: vibrate-size-44; }
+@keyframes vibrate-size-44 { from { transform: scale(1); } 30% { transform: scale(1.3872); } to { transform: scale(1); } }
+.vibrate-size-45 { animation-name: vibrate-size-45; }
+@keyframes vibrate-size-45 { from { transform: scale(1); } 30% { transform: scale(1.405); } to { transform: scale(1); } }
+.vibrate-size-46 { animation-name: vibrate-size-46; }
+@keyframes vibrate-size-46 { from { transform: scale(1); } 30% { transform: scale(1.4232); } to { transform: scale(1); } }
+.vibrate-size-47 { animation-name: vibrate-size-47; }
+@keyframes vibrate-size-47 { from { transform: scale(1); } 30% { transform: scale(1.4418000000000002); } to { transform: scale(1); } }
+.vibrate-size-48 { animation-name: vibrate-size-48; }
+@keyframes vibrate-size-48 { from { transform: scale(1); } 30% { transform: scale(1.4607999999999999); } to { transform: scale(1); } }
+.vibrate-size-49 { animation-name: vibrate-size-49; }
+@keyframes vibrate-size-49 { from { transform: scale(1); } 30% { transform: scale(1.4802); } to { transform: scale(1); } }
+.vibrate-size-50 { animation-name: vibrate-size-50; }
+@keyframes vibrate-size-50 { from { transform: scale(1); } 30% { transform: scale(1.5); } to { transform: scale(1); } }
+.vibrate-size-51 { animation-name: vibrate-size-51; }
+@keyframes vibrate-size-51 { from { transform: scale(1); } 30% { transform: scale(1.5202); } to { transform: scale(1); } }
+.vibrate-size-52 { animation-name: vibrate-size-52; }
+@keyframes vibrate-size-52 { from { transform: scale(1); } 30% { transform: scale(1.5408); } to { transform: scale(1); } }
+.vibrate-size-53 { animation-name: vibrate-size-53; }
+@keyframes vibrate-size-53 { from { transform: scale(1); } 30% { transform: scale(1.5618); } to { transform: scale(1); } }
+.vibrate-size-54 { animation-name: vibrate-size-54; }
+@keyframes vibrate-size-54 { from { transform: scale(1); } 30% { transform: scale(1.5832000000000002); } to { transform: scale(1); } }
+.vibrate-size-55 { animation-name: vibrate-size-55; }
+@keyframes vibrate-size-55 { from { transform: scale(1); } 30% { transform: scale(1.605); } to { transform: scale(1); } }
+.vibrate-size-56 { animation-name: vibrate-size-56; }
+@keyframes vibrate-size-56 { from { transform: scale(1); } 30% { transform: scale(1.6272000000000002); } to { transform: scale(1); } }
+.vibrate-size-57 { animation-name: vibrate-size-57; }
+@keyframes vibrate-size-57 { from { transform: scale(1); } 30% { transform: scale(1.6498000000000002); } to { transform: scale(1); } }
+.vibrate-size-58 { animation-name: vibrate-size-58; }
+@keyframes vibrate-size-58 { from { transform: scale(1); } 30% { transform: scale(1.6728); } to { transform: scale(1); } }
+.vibrate-size-59 { animation-name: vibrate-size-59; }
+@keyframes vibrate-size-59 { from { transform: scale(1); } 30% { transform: scale(1.6962); } to { transform: scale(1); } }
+.vibrate-size-60 { animation-name: vibrate-size-60; }
+@keyframes vibrate-size-60 { from { transform: scale(1); } 30% { transform: scale(1.72); } to { transform: scale(1); } }
+.vibrate-size-61 { animation-name: vibrate-size-61; }
+@keyframes vibrate-size-61 { from { transform: scale(1); } 30% { transform: scale(1.7442); } to { transform: scale(1); } }
+.vibrate-size-62 { animation-name: vibrate-size-62; }
+@keyframes vibrate-size-62 { from { transform: scale(1); } 30% { transform: scale(1.7688000000000001); } to { transform: scale(1); } }
+.vibrate-size-63 { animation-name: vibrate-size-63; }
+@keyframes vibrate-size-63 { from { transform: scale(1); } 30% { transform: scale(1.7938); } to { transform: scale(1); } }
+.vibrate-size-64 { animation-name: vibrate-size-64; }
+@keyframes vibrate-size-64 { from { transform: scale(1); } 30% { transform: scale(1.8192); } to { transform: scale(1); } }
+.vibrate-size-65 { animation-name: vibrate-size-65; }
+@keyframes vibrate-size-65 { from { transform: scale(1); } 30% { transform: scale(1.8450000000000002); } to { transform: scale(1); } }
+.vibrate-size-66 { animation-name: vibrate-size-66; }
+@keyframes vibrate-size-66 { from { transform: scale(1); } 30% { transform: scale(1.8712); } to { transform: scale(1); } }
+.vibrate-size-67 { animation-name: vibrate-size-67; }
+@keyframes vibrate-size-67 { from { transform: scale(1); } 30% { transform: scale(1.8978000000000002); } to { transform: scale(1); } }
+.vibrate-size-68 { animation-name: vibrate-size-68; }
+@keyframes vibrate-size-68 { from { transform: scale(1); } 30% { transform: scale(1.9248000000000003); } to { transform: scale(1); } }
+.vibrate-size-69 { animation-name: vibrate-size-69; }
+@keyframes vibrate-size-69 { from { transform: scale(1); } 30% { transform: scale(1.9522000000000002); } to { transform: scale(1); } }
+.vibrate-size-70 { animation-name: vibrate-size-70; }
+@keyframes vibrate-size-70 { from { transform: scale(1); } 30% { transform: scale(1.9800000000000002); } to { transform: scale(1); } }
+.vibrate-size-71 { animation-name: vibrate-size-71; }
+@keyframes vibrate-size-71 { from { transform: scale(1); } 30% { transform: scale(2.0082); } to { transform: scale(1); } }
+.vibrate-size-72 { animation-name: vibrate-size-72; }
+@keyframes vibrate-size-72 { from { transform: scale(1); } 30% { transform: scale(2.0368); } to { transform: scale(1); } }
+.vibrate-size-73 { animation-name: vibrate-size-73; }
+@keyframes vibrate-size-73 { from { transform: scale(1); } 30% { transform: scale(2.0658); } to { transform: scale(1); } }
+.vibrate-size-74 { animation-name: vibrate-size-74; }
+@keyframes vibrate-size-74 { from { transform: scale(1); } 30% { transform: scale(2.0952); } to { transform: scale(1); } }
+.vibrate-size-75 { animation-name: vibrate-size-75; }
+@keyframes vibrate-size-75 { from { transform: scale(1); } 30% { transform: scale(2.125); } to { transform: scale(1); } }
+.vibrate-size-76 { animation-name: vibrate-size-76; }
+@keyframes vibrate-size-76 { from { transform: scale(1); } 30% { transform: scale(2.1552); } to { transform: scale(1); } }
+.vibrate-size-77 { animation-name: vibrate-size-77; }
+@keyframes vibrate-size-77 { from { transform: scale(1); } 30% { transform: scale(2.1858); } to { transform: scale(1); } }
+.vibrate-size-78 { animation-name: vibrate-size-78; }
+@keyframes vibrate-size-78 { from { transform: scale(1); } 30% { transform: scale(2.2168); } to { transform: scale(1); } }
+.vibrate-size-79 { animation-name: vibrate-size-79; }
+@keyframes vibrate-size-79 { from { transform: scale(1); } 30% { transform: scale(2.2482); } to { transform: scale(1); } }
+.vibrate-size-80 { animation-name: vibrate-size-80; }
+@keyframes vibrate-size-80 { from { transform: scale(1); } 30% { transform: scale(2.2800000000000002); } to { transform: scale(1); } }
+.vibrate-size-81 { animation-name: vibrate-size-81; }
+@keyframes vibrate-size-81 { from { transform: scale(1); } 30% { transform: scale(2.3122000000000003); } to { transform: scale(1); } }
+.vibrate-size-82 { animation-name: vibrate-size-82; }
+@keyframes vibrate-size-82 { from { transform: scale(1); } 30% { transform: scale(2.3448); } to { transform: scale(1); } }
+.vibrate-size-83 { animation-name: vibrate-size-83; }
+@keyframes vibrate-size-83 { from { transform: scale(1); } 30% { transform: scale(2.3778); } to { transform: scale(1); } }
+.vibrate-size-84 { animation-name: vibrate-size-84; }
+@keyframes vibrate-size-84 { from { transform: scale(1); } 30% { transform: scale(2.4112); } to { transform: scale(1); } }
+.vibrate-size-85 { animation-name: vibrate-size-85; }
+@keyframes vibrate-size-85 { from { transform: scale(1); } 30% { transform: scale(2.445); } to { transform: scale(1); } }
+.vibrate-size-86 { animation-name: vibrate-size-86; }
+@keyframes vibrate-size-86 { from { transform: scale(1); } 30% { transform: scale(2.4791999999999996); } to { transform: scale(1); } }
+.vibrate-size-87 { animation-name: vibrate-size-87; }
+@keyframes vibrate-size-87 { from { transform: scale(1); } 30% { transform: scale(2.5138); } to { transform: scale(1); } }
+.vibrate-size-88 { animation-name: vibrate-size-88; }
+@keyframes vibrate-size-88 { from { transform: scale(1); } 30% { transform: scale(2.5488); } to { transform: scale(1); } }
+.vibrate-size-89 { animation-name: vibrate-size-89; }
+@keyframes vibrate-size-89 { from { transform: scale(1); } 30% { transform: scale(2.5842); } to { transform: scale(1); } }
+.vibrate-size-90 { animation-name: vibrate-size-90; }
+@keyframes vibrate-size-90 { from { transform: scale(1); } 30% { transform: scale(2.62); } to { transform: scale(1); } }
+.vibrate-size-91 { animation-name: vibrate-size-91; }
+@keyframes vibrate-size-91 { from { transform: scale(1); } 30% { transform: scale(2.6562); } to { transform: scale(1); } }
+.vibrate-size-92 { animation-name: vibrate-size-92; }
+@keyframes vibrate-size-92 { from { transform: scale(1); } 30% { transform: scale(2.6928); } to { transform: scale(1); } }
+.vibrate-size-93 { animation-name: vibrate-size-93; }
+@keyframes vibrate-size-93 { from { transform: scale(1); } 30% { transform: scale(2.7298); } to { transform: scale(1); } }
+.vibrate-size-94 { animation-name: vibrate-size-94; }
+@keyframes vibrate-size-94 { from { transform: scale(1); } 30% { transform: scale(2.7672000000000003); } to { transform: scale(1); } }
+.vibrate-size-95 { animation-name: vibrate-size-95; }
+@keyframes vibrate-size-95 { from { transform: scale(1); } 30% { transform: scale(2.805); } to { transform: scale(1); } }
+.vibrate-size-96 { animation-name: vibrate-size-96; }
+@keyframes vibrate-size-96 { from { transform: scale(1); } 30% { transform: scale(2.8432); } to { transform: scale(1); } }
+.vibrate-size-97 { animation-name: vibrate-size-97; }
+@keyframes vibrate-size-97 { from { transform: scale(1); } 30% { transform: scale(2.8818); } to { transform: scale(1); } }
+.vibrate-size-98 { animation-name: vibrate-size-98; }
+@keyframes vibrate-size-98 { from { transform: scale(1); } 30% { transform: scale(2.9208); } to { transform: scale(1); } }
+.vibrate-size-99 { animation-name: vibrate-size-99; }
+@keyframes vibrate-size-99 { from { transform: scale(1); } 30% { transform: scale(2.9602); } to { transform: scale(1); } }
+.vibrate-size-100 { animation-name: vibrate-size-100; }
+@keyframes vibrate-size-100 { from { transform: scale(1); } 30% { transform: scale(3); } to { transform: scale(1); } }
 
 #song-detail {
   display: none;
