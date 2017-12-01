@@ -273,7 +273,7 @@
     function createPlayer(parent, disk) {
         var player = parent
             .append('g')
-            .attr('transform', translate(disk.center.x - 50, disk.center.y - 50))
+            .attr('transform', translate(disk.center.x - 75, disk.center.y - 75))
         ;
 
         player
@@ -281,9 +281,9 @@
             .append('clipPath')
             .attr('id', 'player-art-clip')
             .append('circle')
-            .attr('r', 50)
-            .attr('cx', 50)
-            .attr('cy', 50)
+            .attr('r', 75)
+            .attr('cx', 75)
+            .attr('cy', 75)
         ;
 
         var artContainer = player
@@ -294,7 +294,7 @@
         var playBtn = player
             .append('g')
             .attr('class', 'player-control-play')
-            .attr('transform', translate(35, 35))
+            .attr('transform', translate(60, 60))
             .classed('player-control-visible', true)
             .on('click', play)
         ;
@@ -307,7 +307,7 @@
         var pauseBtn = player
             .append('g')
             .attr('class', 'player-control-pause')
-            .attr('transform', translate(35, 35))
+            .attr('transform', translate(60, 60))
             .classed('player-control-visible', true)
             .on('click', pause)
         ;
@@ -613,8 +613,8 @@
             .attr('opacity', '0.4')
             .attr('x', '0')
             .attr('y', '0')
-            .attr('width', '100')
-            .attr('height', '100')
+            .attr('width', '150')
+            .attr('height', '150')
             .attr('clip-path', 'url(#player-art-clip)')
             .attr('xlink:href', track.image)
         ;
