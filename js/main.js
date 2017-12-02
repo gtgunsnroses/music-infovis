@@ -98,7 +98,7 @@
         var height = $(parent.node()).height();
 
         // Dimensions of the chart.
-        var margin = {top: 30, right: 60, bottom: 20, left: 50};
+        var margin = {top: 40, right: 60, bottom: 20, left: 60};
         width -= (margin.left + margin.right);
         height -= (margin.top + margin.bottom);
 

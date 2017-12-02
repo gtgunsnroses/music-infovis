@@ -711,6 +711,11 @@ body {
   fill: var(--grey);
 }
 
+.x-axis,
+.y-axis {
+  font-size: 14px;
+}
+
 .popularity {
   cursor: pointer
 }
