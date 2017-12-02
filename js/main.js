@@ -22,14 +22,12 @@
 
     function init() {
         $('#help-btn').on('click', function() {
-            console.log('click')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
         })
 
         $('#close-btn').on('click', function() {
-            console.log('click')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
@@ -621,7 +619,6 @@
             .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .on('click', changeTrackAndPlay)
             .on('mouseenter', function(track, i) {
-                console.log(track)
                 $('#song-name').empty()
                 $('#song-artist').empty()
                 $('#energy').empty()
@@ -721,14 +718,12 @@
     }
 
     function play() {
-        console.log('playing');
         d3.select('#player')['_groups'][0][0].play();
         d3.select('.player-control-play').classed('player-control-visible', true);
         d3.select('.player-control-pause').classed('player-control-visible', false);
     }
 
     function pause() {
-        console.log('pausing');
         d3.select('#player')['_groups'][0][0].pause();
         d3.select('.player-control-play').classed('player-control-visible', false);
         d3.select('.player-control-pause').classed('player-control-visible', true);
