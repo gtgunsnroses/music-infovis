@@ -240,8 +240,14 @@
         ;
 
         // Update x-axis and y-axis.
-        chart.svg.selectAll('.x-axis').call(d3.axisTop(chart.x).ticks(5));
-        chart.svg.selectAll('.y-axis').call(d3.axisLeft(chart.y).tickFormat(d3.format('d')));
+        var yAxis = d3.axisLeft(chart.y).tickFormat(d3.format('d'));
+        var xAxis = d3.axisTop(chart.x).ticks(5);
+        if (!['tempo', 'loudness'].includes(prop)) {
+            xAxis.tickFormat(function (d) { return Math.round(d * 100); });
+        }
+
+        chart.svg.selectAll('.x-axis').call(xAxis);
+        chart.svg.selectAll('.y-axis').call(yAxis);
     }
 
     function createDetail(parent) {
