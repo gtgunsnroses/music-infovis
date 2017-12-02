@@ -290,7 +290,7 @@
             .text('2000')
             .attr('text-anchor', 'middle')
             .attr('x', 0.5 * width)
-            .attr('y', 0.11 * height)
+            .attr('y', 0.07 * height)
         ;
 
 
