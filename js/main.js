@@ -165,10 +165,17 @@
         yExtent[1] -= 1;
 
         chart.y.domain(yExtent);
-        chart.x.domain([
-            d3.min(pairs, function(d) { return d[prop] - 0.01; }),
-            d3.max(pairs, function(d) { return d[prop] + 0.01; })
-        ]);
+
+        if ('tempo' === prop) {
+            chart.x.domain([
+                d3.min(pairs, function(d) { return 0.95 * d[prop]; }),
+                d3.max(pairs, function(d) { return 1.05 * d[prop]; })
+            ]);
+        } else if ('loudness' === prop) {
+            chart.x.domain([-12, -4]);
+        } else {
+            chart.x.domain([0, 1]);
+        }
 
         var radius = d3.scaleLinear().range([5, 20]).domain([
             d3.min(pairs, function(d) { return d.popularity; }),
