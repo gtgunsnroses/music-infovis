@@ -748,9 +748,24 @@ body {
   background-color: rgba(250, 165, 165, 0.12);
 }
 
+.year-slider-knob {
+  fill: var(--grey);
+  cursor: pointer;
+}
+
 .selection-line {
   stroke: var(--grey);
   stroke-width: 0.5px;
+}
+
+.year-slider-track {
+  cursor: pointer;
+  stroke: transparent;
+  fill: transparent;
+}
+
+.year-slider-track:active {
+  cursor: ns-resize;
 }
 
 .year-label {

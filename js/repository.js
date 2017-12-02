@@ -80,8 +80,7 @@
      */
     function aggregateByYear(propsToFn, table) {
         var props = Object.keys(propsToFn);
-
-        return table
+        var aggregate = table
             .reduce(groupBy.bind(null, 'year', props), [])
             .filter(function (aggregate) { return !!aggregate.year; })
             .map(function (aggregate) {
@@ -99,6 +98,10 @@
                 return aggregate;
             })
         ;
+
+        aggregate.sort(function (a, b) { return a.year - b.year; });
+
+        return aggregate;
     }
 
     /**

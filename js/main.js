@@ -1,3 +1,14 @@
+(function ($) {
+    'use strict';
+
+    jQuery.fn.d3Click = function () {
+      this.each(function (i, e) {
+        var evt = new MouseEvent("click");
+        e.dispatchEvent(evt);
+      });
+    };
+})(jQuery);
+
 (function (d3, w) {
     'use strict';
 
@@ -29,8 +40,8 @@
         var overviewParent = d3.select('#overview').html('');
         var detailParent = d3.select('#detail').html('');
 
-        var overview = createOverview(overviewParent);
         var detail = createDetail(detailParent);
+        var overview = createOverview(overviewParent, detail);
 
         var fetching = repo.avgByYear([
             'popularity',
@@ -42,11 +53,10 @@
             'popularity'
         ]);
 
-
-        fetching.then(p(updateOverview, overview, detail, 'loudness'));
-        repo.tracksOfYear(2000)
-            .then(function (tracks) { return {tracks: tracks, year: 2000}; })
-            .then(p(updateDetail, detail))
+        fetching
+            .then(p(updateOverview, overview, detail, 'loudness'))
+            // Click on the first year to make it visible.
+            .then(function () { $('.year-item').last().d3Click(); })
         ;
 
         d3.selectAll('.js-aggregation').on('click', function (_, i, selection) {
@@ -69,18 +79,57 @@
         ;
     }
 
-    function createOverview(parent) {
+    function onYearChange(overview, detail, year, i, itemsAll) {
+        d3.selectAll(itemsAll).classed('selected', false);
+        d3.select(itemsAll[i]).classed('selected', true);
+
+        var line = d3.select('.selection-line');
+
+        line
+            .attr('y1', overview.y(year))
+            .attr('y2', overview.y(year))
+        ;
+
+        var knob = d3.select('.year-slider-knob').attr('cy', overview.scale(year));
+
+        updateYear(year, detail);
+    }
+
+    function createOverview(parent, detail) {
         var width = parent.node().getBoundingClientRect().width;
         var height = $(parent.node()).height();
 
         // Dimensions of the chart.
-        var margin = {top: 30, right: 20, bottom: 20, left: 50};
+        var margin = {top: 30, right: 60, bottom: 20, left: 50};
         width -= (margin.left + margin.right);
         height -= (margin.top + margin.bottom);
 
         var svg = parent.append('svg')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
+        ;
+
+        var chart = {
+            svg: svg,
+            x: d3.scaleLinear().range([0, width]),
+            y: d3.scaleLinear().range([0, height]),
+            scale: d3.scaleLinear().domain([2015, 1965]).range([0 + (1/52 * height), height - (1/52 * height)]).clamp(true)
+        };
+
+        var yearItems = [];
+
+        createYearSlider(svg, chart.scale, width, height, margin)
+            .on('slider-adjusted.year', function () {
+                if (0 === yearItems.length) {
+                    var missingItems = Array.prototype.slice.call(d3.selectAll('.year-item')._groups[0]);
+                    yearItems.push.apply(yearItems, missingItems);
+                }
+
+                var year = d3.event.detail.year;
+                var i = year - 1965;
+
+                onYearChange(chart, detail, year, i, yearItems);
+            })
         ;
 
         var grid = svg
@@ -93,7 +142,7 @@
             .append('line')
             .attr('class', 'selection-line')
             .attr('x1', 0)
-            .attr('x2', width)
+            .attr('x2', width + 0.5 * margin.right)
         ;
 
         // Adds the x-axis
@@ -108,11 +157,7 @@
             .attr('transform', translate(margin.left, margin.top))
         ;
 
-        return {
-            svg: svg,
-            x: d3.scaleLinear().range([0, width]),
-            y: d3.scaleLinear().range([0, height])
-        };
+        return chart;
     }
 
     function updateOverview(chart, detail, prop, pairs) {
@@ -150,19 +195,7 @@
         itemsAll
             .attr('r', function (pair) { return radius(pair.popularity); })
             .on('click', function (pair, i, itemsAll) {
-                d3.selectAll(itemsAll).classed('selected', false);
-                d3.select(itemsAll[i]).classed('selected', true);
-
-                var line = d3.select('.selection-line');
-
-                line
-                    .transition()
-                    .duration(1000)
-                    .attr('y1', chart.y(pair.year))
-                    .attr('y2', chart.y(pair.year))
-                ;
-
-                updateYear(pair.year, detail);
+                onYearChange(chart, detail, pair.year, i, itemsAll);
             })
             .on('mouseenter', function(pair, i, itemsAll) {
                 $('#year').empty()
@@ -247,7 +280,7 @@
             .attr('text-anchor', 'middle')
             .attr('x', 0.5 * width)
             .attr('y', 0.11 * height)
-
+        ;
 
 
         var chart = {
@@ -387,6 +420,46 @@
             .append('path')
             .attr('d', path.toString())
         ;
+    }
+
+    function createYearSlider(parent, scale, width, height, margin) {
+        var slider = parent.append('g').attr('class', 'year-slider');
+        var knob = slider.append('circle');
+        var track = slider.append('rect');
+
+        slider
+            .attr('transform', translate(margin.left + width + 0.5 * margin.right, margin.top))
+        ;
+
+        track
+            .attr('class', 'year-slider-track')
+            .attr('x', -(width + 0.5 * margin.right))
+            .attr('y', 0)
+            .attr('width', width + margin.right)
+            .attr('height', height)
+        ;
+
+        knob
+            .attr('class', 'year-slider-knob')
+            .attr('r', 8)
+        ;
+
+        track.call(d3.drag()
+            .on('start.interrupt', function() { slider.interrupt(); })
+            .on('start drag', function () {
+                slider.dispatch('slider-adjusted', {detail: {
+                    // Subtracting disk center, because it is 50% from
+                    // beginning and we're also translating by -50% in CCS.
+                    year: Math.round(scale.invert(d3.event.y))
+                }});
+            })
+        );
+
+        slider.on('slider-adjusted.knob', function () {
+            knob.attr('cy', scale(d3.event.detail.year));
+        });
+
+        return slider;
     }
 
     function createPopularitySlider(parent, disk) {
