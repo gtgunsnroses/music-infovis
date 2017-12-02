@@ -331,6 +331,7 @@
             .dispatch('slider-adjusted', {detail: {popularity: chart.popularityDisk.threshold}})
         ;
 
+
         createPlayer(svg, chart.popularityDisk)
             .attr('class', 'player-control')
         ;
@@ -364,6 +365,7 @@
             .append('g')
             .attr('class', 'player-art-container')
         ;
+
 
         var playBtn = player
             .append('g')
@@ -401,6 +403,8 @@
             .attr('width', 10)
             .attr('height', 30)
         ;
+
+
 
         return player;
     }
@@ -574,6 +578,21 @@
         return 'rgb(' + r + ', ' + g + ', ' + b + ')';
     }
 
+    function refreshPlayer() {
+        pause()
+        d3
+            .select('.player-art-container')
+            .html('')
+            .append('image')
+            .attr('opacity', '1')
+            .attr('x', '0')
+            .attr('y', '0')
+            .attr('width', '150')
+            .attr('height', '150')
+            .attr('clip-path', 'url(#player-art-clip)')
+            .attr('xlink:href', '../img/player_default@x2.png')
+    }
+
     function updateDetail(chart, tracksAndYear) {
         var year = tracksAndYear.year;
         var tracks = tracksAndYear.tracks;
@@ -604,6 +623,9 @@
 
         $('.year-label').empty()
         $('.year-label').append(year)
+
+        refreshPlayer()
+
 
 
         itemsAll
@@ -711,8 +733,21 @@
     function changeTrackAndPlay(track) {
         if (!track.preview) {
             pause();
+            d3
+            .select('.player-art-container')
+            .html('')
+            .append('image')
+            .attr('opacity', '1')
+            .attr('x', '0')
+            .attr('y', '0')
+            .attr('width', '150')
+            .attr('height', '150')
+            .attr('clip-path', 'url(#player-art-clip)')
+            .attr('xlink:href', '../img/player_no_track@x2.png')
+        ;
         }
 
+        else {
         d3
             .select('.player-art-container')
             .html('')
@@ -724,22 +759,27 @@
             .attr('height', '150')
             .attr('clip-path', 'url(#player-art-clip)')
             .attr('xlink:href', track.image)
+            .attr('class', 'art-rotate')
         ;
+        
 
         d3.select('#player').attr('src', track.preview);
         play();
+    }
     }
 
     function play() {
         d3.select('#player')['_groups'][0][0].play();
         d3.select('.player-control-play').classed('player-control-visible', true);
         d3.select('.player-control-pause').classed('player-control-visible', false);
+        $('.art-rotate').removeClass('art-rotate-pause')
     }
 
     function pause() {
         d3.select('#player')['_groups'][0][0].pause();
         d3.select('.player-control-play').classed('player-control-visible', false);
         d3.select('.player-control-pause').classed('player-control-visible', true);
+        $('.art-rotate').addClass('art-rotate-pause')
     }
 
     function updateOpacity(popularity, track) {

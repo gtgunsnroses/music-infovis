@@ -848,3 +848,25 @@ body {
 .close-btn:hover {
   background-color: rgba(250, 165, 165, 0.12);
 }
+
+@keyframes art-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.art-rotate {
+  transition-timing-function: linear;
+  animation: art-rotate 20s infinite;
+  transform-origin: 75px 75px;
+  animation-play-state: running;
+}
+
+.art-rotate-pause {
+  animation-play-state: paused !important;
+}

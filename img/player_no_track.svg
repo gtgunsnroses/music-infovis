@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 3 Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="131.831888%" gradientTransform="translate(0.500000,0.500000),rotate(90.000000),scale(1.000000,1.273145),translate(-0.500000,-0.500000)" id="radialGradient-1">
+            <stop stop-color="#443F5F" offset="0%"></stop>
+            <stop stop-color="#F9BDBD" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="157.767064%" gradientTransform="translate(0.500000,0.500000),rotate(90.000000),scale(1.000000,1.273145),translate(-0.500000,-0.500000)" id="radialGradient-2">
+            <stop stop-color="#443F5F" offset="0%"></stop>
+            <stop stop-color="#F9BDBD" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Portfolio" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-3-Copy">
+            <circle id="Oval-3" stroke="#FAA5A5" fill="url(#radialGradient-1)" cx="250" cy="250" r="250"></circle>
+            <circle id="Oval-4" stroke="#FAA5A5" fill="url(#radialGradient-2)" cx="251" cy="251" r="214"></circle>
+            <text id="we-are-missing-this" font-family="RobotoCondensed-Light, Roboto Condensed" font-size="30" font-style="condensed" font-weight="300" fill="#FAA5A5">
+                <tspan x="106.029785" y="311">we are missing this track</tspan>
+            </text>
+            <text id="SORRY" font-family="RobotoCondensed-Light, Roboto Condensed" font-size="70" font-style="condensed" font-weight="300" fill="#FAA5A5">
+                <tspan x="155.305176" y="253">SORRY</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
