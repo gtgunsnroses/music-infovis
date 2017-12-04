@@ -653,7 +653,6 @@
         $('.year-label').empty()
         $('.year-label').append(year)
 
-        refreshPlayer()
 
         itemsDel
             .on('click', null)
