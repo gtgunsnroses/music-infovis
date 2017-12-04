@@ -366,6 +366,10 @@
             .attr('class', 'player-art-container')
         ;
 
+        artContainer
+            .on('click', play)
+        ;
+
 
         var playBtn = player
             .append('g')
@@ -378,6 +382,7 @@
         playBtn
             .append('polygon')
             .attr('points', '0,0 30,15 0,30')
+
         ;
 
         var pauseBtn = player
@@ -773,6 +778,8 @@
         d3.select('.player-control-play').classed('player-control-visible', true);
         d3.select('.player-control-pause').classed('player-control-visible', false);
         $('.art-rotate').removeClass('art-rotate-pause')
+        $('.player-art-container').off('click', play)
+        $('.player-art-container').on('click', pause)
     }
 
     function pause() {
@@ -780,6 +787,8 @@
         d3.select('.player-control-play').classed('player-control-visible', false);
         d3.select('.player-control-pause').classed('player-control-visible', true);
         $('.art-rotate').addClass('art-rotate-pause')
+        $('.player-art-container').off('click', pause)
+        $('.player-art-container').on('click', play)
     }
 
     function updateOpacity(popularity, track) {

@@ -876,3 +876,13 @@ body {
 .art-rotate-pause {
   animation-play-state: paused !important;
 }
+
+.player-art-container {
+  opacity: 1;
+  transition: all 0.1s cubic-bezier(0.11, 0.45, 0.22, 1.04);
+  cursor: pointer;
+}
+
+.player-art-container:hover {
+  opacity: 0.5;
+}
