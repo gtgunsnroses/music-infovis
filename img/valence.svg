@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="242px" height="177px" viewBox="0 0 242 177" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#C77474" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FAA5A5" stop-opacity="0.3" offset="49.7309471%"></stop>
+            <stop stop-color="#FB60A0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFC8C8" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FFC8C8" stop-opacity="0.310603487" offset="49.7309471%"></stop>
+            <stop stop-color="#FFC8C8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FFE7E7" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FFE1E1" stop-opacity="0.310603487" offset="49.7309471%"></stop>
+            <stop stop-color="#FEE3E3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.310603487" offset="50.0677615%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#55E6E6" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#55E6E6" stop-opacity="0.3" offset="49.2287149%"></stop>
+            <stop stop-color="#55E6E6" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-6">
+            <stop stop-color="#79E0E0" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#79E0E0" stop-opacity="0.3" offset="49.2287149%"></stop>
+            <stop stop-color="#79E0E0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.56742513%" x2="50%" y2="100%" id="linearGradient-7">
+            <stop stop-color="#B0DEDE" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#B0DEDE" stop-opacity="0.3" offset="49.2287149%"></stop>
+            <stop stop-color="#B0DEDE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="mood--unorganized-copy-2" transform="translate(-1601.000000, -1328.000000)">
+            <g id="Group-6" transform="translate(1600.000000, 1325.000000)">
+                <g id="color-shceme" transform="translate(27.265785, 34.000000)">
+                    <rect id="Rectangle-Copy-7" fill="url(#linearGradient-1)" x="181" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                    <rect id="Rectangle-Copy-8" fill="url(#linearGradient-2)" x="151" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                    <rect id="Rectangle-Copy-10" fill="url(#linearGradient-3)" x="121" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                    <rect id="Rectangle-Copy-21" fill="url(#linearGradient-4)" x="91" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                    <rect id="Rectangle-Copy-22" fill="url(#linearGradient-5)" x="0" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                    <rect id="Rectangle-Copy-23" fill="url(#linearGradient-6)" x="30" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                    <rect id="Rectangle-Copy-24" fill="url(#linearGradient-7)" x="60" y="0" width="11" height="111.898878" rx="5.5"></rect>
+                </g>
+                <text id="Valence" font-family="RobotoCondensed-Regular, Roboto Condensed" font-size="18" font-style="condensed" font-weight="normal" fill="#FAA5A5">
+                    <tspan x="94" y="17">Valence</tspan>
+                </text>
+                <text id="Negative" font-family="RobotoCondensed-Regular, Roboto Condensed" font-size="18" font-style="condensed" font-weight="normal" fill="#FAA5A5">
+                    <tspan x="0.265784773" y="175.898878">Negative</tspan>
+                </text>
+                <text id="Postive" font-family="RobotoCondensed-Regular, Roboto Condensed" font-size="18" font-style="condensed" font-weight="normal" fill="#FAA5A5">
+                    <tspan x="191.265785" y="175.898878">Postive</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

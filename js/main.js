@@ -294,6 +294,7 @@
         ;
 
 
+
         var chart = {
             svg: svg,
             popularityDisk: {
@@ -340,6 +341,15 @@
             .append('g')
             .attr('class', 'detail-container')
         ;
+
+        svg
+            .append('g')
+            .append('image')
+            .attr('opacity', '1')
+            .attr('x', width - 150)
+            .attr('y', height - 150)
+            .attr('width', '100')
+            .attr('xlink:href', './img/valence.png')
 
 
         return chart;
