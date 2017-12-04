@@ -22,12 +22,21 @@
 
     function init() {
         $('#help-btn').on('click', function() {
+            console.log('close!')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
         })
 
         $('#close-btn').on('click', function() {
+            console.log('close!!')
+            $('#help').toggleClass('help-container--hidden')
+            $('#help-btn').toggleClass('help-btn--hidden')
+            $('#main-vis').toggleClass('main-vis--blur')
+        })
+
+        $('.help-background').on('click', function() {
+            console.log('close!')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
