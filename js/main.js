@@ -196,6 +196,13 @@
 
         itemsNew = itemsNew.append('circle').attr('class', 'year-item');
 
+        itemsDel
+            .on('click', null)
+            .on('mouseenter', null)
+            .on('mousemove', null)
+            .on('mouseout', null)
+        ;
+
         var itemsAll = itemsOld.merge(itemsNew);
         itemsAll
             .attr('r', function (pair) { return radius(pair.popularity); })
@@ -639,7 +646,12 @@
 
         refreshPlayer()
 
-
+        itemsDel
+            .on('click', null)
+            .on('mouseenter', null)
+            .on('mousemove', null)
+            .on('mouseout', null)
+        ;
 
         itemsAll
             .select('.circle-container')
