@@ -214,21 +214,19 @@
                 $('#year-danceability').empty()
                 $('#year-danceability').append(pair.danceability.toFixed(2))
                 $('#year-detail').addClass('detail-show')
-                $(document).on('mousemove', function(e){
-                    if (e.pageY + 30 + $('#year-detail').height() > $(window).height()) {
-                        $('#year-detail').css({
-                           left:  e.pageX,
-                           top:   e.pageY - $('#year-detail').height() - 30
-                        });
-                    }
-
-                    else {
-                        $('#year-detail').css({
-                           left:  e.pageX,
-                           top:   e.pageY + 30
-                        });
-                    }
-                });
+            })
+            .on('mousemove', function (pair, i, itemsAll) {
+                if (d3.event.pageY + 30 + $('#year-detail').height() > $(window).height()) {
+                    $('#year-detail').css({
+                       left:  d3.event.pageX,
+                       top:   d3.event.pageY - $('#year-detail').height() - 30
+                    });
+                } else {
+                    $('#year-detail').css({
+                       left:  d3.event.pageX,
+                       top:   d3.event.pageY + 30
+                    });
+                }
             })
             .on('mouseout', function(pair, i, itemsAll) {
                 $('#year-detail').removeClass('detail-show')
@@ -684,22 +682,20 @@
                 $('#tempo').append(track.tempo)
                 $('#popularity').append(track.popularity)
                 $('#rank-num').append(track.rank)
-                $(document).on('mousemove', function(e){
-                    if (e.pageY + 30 + $('#song-detail').height() > $(window).height()) {
-                        $('#song-detail').css({
-                           left:  e.pageX,
-                           top:   e.pageY - $('#song-detail').height() - 30
-                        });
-                    }
-
-                    else {
-                        $('#song-detail').css({
-                           left:  e.pageX,
-                           top:   e.pageY + 30
-                        });
-                    }
-                });
                 return arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+            })
+            .on('mousemove', function (track, i) {
+                if (d3.event.pageY + 30 + $('#song-detail').height() > $(window).height()) {
+                    $('#song-detail').css({
+                       left:  d3.event.pageX,
+                       top:   d3.event.pageY - $('#song-detail').height() - 30
+                    });
+                } else {
+                    $('#song-detail').css({
+                       left:  d3.event.pageX,
+                       top:   d3.event.pageY + 30
+                    });
+                }
             })
             .on('mouseout', function(track, i) {
                 $('#song-detail').removeClass('detail-show')
@@ -776,7 +772,7 @@
             .attr('xlink:href', track.image)
             .attr('class', 'art-rotate')
         ;
-        
+
 
         d3.select('#player').attr('src', track.preview);
         play();
