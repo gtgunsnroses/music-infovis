@@ -816,7 +816,6 @@ body {
   position: absolute;
   z-index: 100;
   width: 90%;
-  height: 90%;
   left: 50%;
   top: 50%;
   border-radius: 5px;
@@ -826,6 +825,10 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   filter: blue(5px);
   transition: all 0.4s cubic-bezier(0.11, 0.45, 0.22, 1.04);
+}
+
+.tutorial-img {
+  width: 100%;
 }
 
 .help-container--hidden {

@@ -590,7 +590,7 @@
             .attr('width', '150')
             .attr('height', '150')
             .attr('clip-path', 'url(#player-art-clip)')
-            .attr('xlink:href', '../img/player_default@x2.png')
+            .attr('xlink:href', './img/player_default@x2.png')
     }
 
     function updateDetail(chart, tracksAndYear) {
@@ -743,7 +743,7 @@
             .attr('width', '150')
             .attr('height', '150')
             .attr('clip-path', 'url(#player-art-clip)')
-            .attr('xlink:href', '../img/player_no_track@x2.png')
+            .attr('xlink:href', './img/player_no_track@x2.png')
         ;
         }
 
