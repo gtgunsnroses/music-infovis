@@ -154,7 +154,7 @@ body {
 
 .pop-slider-track {
     stroke: var(--grey);
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 .pop-slider-overlay {
@@ -760,7 +760,7 @@ body {
 
 .selection-line {
   stroke: var(--grey);
-  stroke-width: 0.5px;
+  stroke-width: 1px;
 }
 
 .year-slider-track {
