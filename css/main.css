@@ -693,7 +693,7 @@ body {
 }
 
 .year-item.selected {
-  fill: rgba(250, 165, 165, 0.25);
+  fill: rgba(250, 165, 165, 0.4);
   stroke: #FAA5A5;
   cursor: default;
   fill: rgba();

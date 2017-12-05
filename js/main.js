@@ -97,7 +97,7 @@
             .attr('y2', overview.y(year))
         ;
 
-        var knob = d3.select('.year-slider-knob').attr('cy', overview.scale(year));
+        var knob = d3.select('.year-slider-knob').attr('y', overview.scale(year)-10);
 
         updateYear(year, detail);
     }
@@ -484,8 +484,9 @@
 
     function createYearSlider(parent, scale, width, height, margin) {
         var slider = parent.append('g').attr('class', 'year-slider');
-        var knob = slider.append('circle');
+        var knob = slider.append('image').attr('xlink:href', './img/knob.png');
         var track = slider.append('rect');
+
 
         slider
             .attr('transform', translate(margin.left + width + 0.5 * margin.right, margin.top))
@@ -501,7 +502,9 @@
 
         knob
             .attr('class', 'year-slider-knob')
-            .attr('r', 8)
+            //.attr('r', 8)
+            .attr('height', 20)
+            .attr('width', 20)
         ;
 
         track.call(d3.drag()
@@ -516,7 +519,10 @@
         );
 
         slider.on('slider-adjusted.knob', function () {
-            knob.attr('cy', scale(d3.event.detail.year));
+            knob
+                //.attr('cy', scale(d3.event.detail.year));
+                .attr('y', scale(d3.event.detail.year) - 10);
+
         });
 
         return slider;
@@ -558,9 +564,12 @@
         slider.append('text').attr('class', 'pop-slider-txt').attr('y', max + 3).attr('text-anchor', 'middle').text(100);
 
         var knob = slider
-            .append('circle')
+            //.append('circle')
+            .append('image').attr('xlink:href', './img/knob.png')
             .attr('class', 'pop-slider-knob')
-            .attr('r', 5)
+            .attr('height', 10)
+            .attr('width', 10)
+            .attr('x', '-5')
         ;
 
         var knobText = slider
@@ -596,8 +605,12 @@
         var t = popularity * 0.01;
         var radius = (1 - t) * 8 + t * 12;
 
-        knob.attr('cy', scale(popularity));
-        knob.attr('r', radius);
+        //knob.attr('cy', scale(popularity));
+        //knob.attr('r', radius);
+        knob.attr('y', scale(popularity) - radius);
+        knob.attr('x', - radius);
+        knob.attr('height', 2 * radius);
+        knob.attr('width', 2 * radius);
         text.text(Math.round(popularity));
         text.attr('y', scale(popularity) + 5)
         text.attr('x', radius + 5);
