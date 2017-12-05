@@ -607,22 +607,6 @@
         return 'translate(' + x + ', ' + y + ')';
     }
 
-    function color(track) {
-        // Linear interpolation between 2 values.
-        var l = function l(a, b, t) { return Math.round((1 - t) * a + t * b); };
-
-        var h = [85, 230, 230]; // Happy
-        var n = [255, 255, 255]; // Neutral
-        var s = [251, 96, 160]; // Sad
-
-        var t = track.valence;
-        var r = t < 0.5 ? l(s[0], n[0], t / 0.5) : l(n[0], h[0], (t - 0.5) / 0.5);
-        var g = t < 0.5 ? l(s[1], n[1], t / 0.5) : l(n[1], h[1], (t - 0.5) / 0.5);
-        var b = t < 0.5 ? l(s[2], n[2], t / 0.5) : l(n[2], h[2], (t - 0.5) / 0.5);
-
-        return 'rgb(' + r + ', ' + g + ', ' + b + ')';
-    }
-
     function refreshPlayer() {
         pause()
         d3
@@ -695,11 +679,16 @@
             })
         ;
 
+        var color = d3.scaleLinear()
+            .domain([0.0, 0.5, 1.0])
+            .range(['#55E6E6', '#FFFFFF', '#FB60A0'])
+        ;
+
         itemsAll
             .select('.popularity')
             .attr('d', p(createArc, 0.2, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
-            .attr('fill', p(color))
+            .attr('fill', function (track, i) { return color(track.valence); })
             .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .on('click', changeTrackAndPlay)
             .on('mouseenter', function(track, i) {
@@ -714,7 +703,7 @@
                 $('#song-name').append(track.name)
                 $('#song-artist').append(track.artist)
                 $('#energy').append(track.energy);
-                $('#valence').append(track.danceability)
+                $('#valence').append(track.valence)
                 $('#tempo').append(track.tempo)
                 $('#popularity').append(track.popularity)
                 $('#rank-num').append(track.rank)
