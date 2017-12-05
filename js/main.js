@@ -607,6 +607,7 @@
         return 'translate(' + x + ', ' + y + ')';
     }
 
+
     function refreshPlayer() {
         pause()
         d3
