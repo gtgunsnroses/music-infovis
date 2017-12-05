@@ -228,7 +228,11 @@
                 $('#year-tempo').empty()
                 $('#year-tempo').append(pair.tempo.toFixed(2))
                 $('#year-danceability').empty()
-                $('#year-danceability').append(pair.danceability.toFixed(2))
+                $('#year-danceability').append(pair.acousticness.toFixed(2))
+                $('#year-acousticness').empty()
+                $('#year-acousticness').append(pair.acousticness.toFixed(2))
+                $('#year-loudness').empty()
+                $('#year-loudness').append(pair.loudness.toFixed(2))
                 $('#year-detail').addClass('detail-show')
             })
             .on('mousemove', function (pair, i, itemsAll) {
@@ -364,6 +368,18 @@
             .attr('y', height - 150)
             .attr('width', '100')
             .attr('xlink:href', './img/valence.png')
+
+        d3
+            .select('.player-art-container')
+            .html('')
+            .append('image')
+            .attr('opacity', '1')
+            .attr('x', '0')
+            .attr('y', '0')
+            .attr('width', '150')
+            .attr('height', '150')
+            .attr('clip-path', 'url(#player-art-clip)')
+            .attr('xlink:href', './img/player_default@x2.png')
 
 
         return chart;
@@ -690,7 +706,7 @@
                 $('#song-name').empty()
                 $('#song-artist').empty()
                 $('#energy').empty()
-                $('#danceability').empty()
+                $('#valence').empty()
                 $('#tempo').empty()
                 $('#popularity').empty()
                 $('#rank-num').empty()
@@ -698,7 +714,7 @@
                 $('#song-name').append(track.name)
                 $('#song-artist').append(track.artist)
                 $('#energy').append(track.energy);
-                $('#danceability').append(track.danceability)
+                $('#valence').append(track.danceability)
                 $('#tempo').append(track.tempo)
                 $('#popularity').append(track.popularity)
                 $('#rank-num').append(track.rank)
