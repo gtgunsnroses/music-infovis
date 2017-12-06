@@ -898,3 +898,6 @@ body {
 .player-art-container:hover {
   opacity: 0.5;
 }
+
+.track-selected {
+}

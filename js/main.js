@@ -705,7 +705,24 @@
             .attr('fill', function (track, i) { return color(track.valence); })
             .attr('fill-opacity', p(updateOpacity, chart.popularityDisk.threshold))
             .on('click', changeTrackAndPlay)
-            .on('mouseenter', function(track, i) {
+            .on('click.highlight', function (track, i, itemsAll) {
+                d3
+                    .selectAll(itemsAll)
+                    .each(function (track, i, itemsAll) {
+                        if (!d3.select(this).classed('track-selected')) {
+                            return;
+                        }
+
+                        arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+                    })
+                    .classed('track-selected', false)
+                ;
+
+                d3.select(itemsAll[i]).classed('track-selected', true);
+                arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+            })
+            .classed('track-selected', false)
+            .on('mouseenter', function(track, i, itemsAll) {
                 $('#song-name').empty()
                 $('#song-artist').empty()
                 $('#energy').empty()
@@ -721,7 +738,10 @@
                 $('#tempo').append(track.tempo)
                 $('#popularity').append(track.popularity)
                 $('#rank-num').append(track.rank)
-                return arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+
+                if (!d3.select(itemsAll[i]).classed('track-selected')) {
+                    arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+                }
             })
             .on('mousemove', function (track, i) {
                 if (d3.event.pageY + 30 + $('#song-detail').height() > $(window).height()) {
@@ -736,9 +756,12 @@
                     });
                 }
             })
-            .on('mouseout', function(track, i) {
+            .on('mouseout', function(track, i, itemsAll) {
                 $('#song-detail').removeClass('detail-show')
-                return arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+
+                if (!d3.select(itemsAll[i]).classed('track-selected')) {
+                    arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+                }
             })
         ;
 
