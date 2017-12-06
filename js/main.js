@@ -716,11 +716,16 @@
                         }
 
                         parent.classed('track-selected', false);
+                        parent.select('.circle').attr('style', null);
                         arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i);
                     })
                 ;
 
-                d3.select(this.parentNode).classed('track-selected', true);
+                d3.select(this.parentNode)
+                    .classed('track-selected', true)
+                    .select('.circle').attr('style', 'stroke: ' + color(track.valence))
+                ;
+
                 arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
             })
             .on('mouseenter', function(track, i, itemsAll) {
