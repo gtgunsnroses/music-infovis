@@ -63,7 +63,7 @@ body {
 }
 
 .head-nav .active {
-  color: FAA5A5;
+  color: #FAA5A5;
 }
 
 .logo-img {
@@ -899,5 +899,11 @@ body {
   opacity: 0.5;
 }
 
-.track-selected {
+.track-selected .circle {
+  stroke: #FAA5A5;
+  stroke-width: 2px;
+}
+
+.track-selected .rank {
+  fill: #FAA5A5;
 }

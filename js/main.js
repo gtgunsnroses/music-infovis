@@ -699,6 +699,7 @@
         ;
 
         itemsAll
+            .classed('track-selected', false)
             .select('.popularity')
             .attr('d', p(createArc, 0.2, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter))
             .attr('transform', translate(cx, cy))
@@ -709,19 +710,19 @@
                 d3
                     .selectAll(itemsAll)
                     .each(function (track, i, itemsAll) {
-                        if (!d3.select(this).classed('track-selected')) {
+                        var parent = d3.select(this.parentNode);
+                        if (!parent.classed('track-selected')) {
                             return;
                         }
 
-                        arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
+                        parent.classed('track-selected', false);
+                        arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i);
                     })
-                    .classed('track-selected', false)
                 ;
 
-                d3.select(itemsAll[i]).classed('track-selected', true);
+                d3.select(this.parentNode).classed('track-selected', true);
                 arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
             })
-            .classed('track-selected', false)
             .on('mouseenter', function(track, i, itemsAll) {
                 $('#song-name').empty()
                 $('#song-artist').empty()
@@ -739,7 +740,7 @@
                 $('#popularity').append(track.popularity)
                 $('#rank-num').append(track.rank)
 
-                if (!d3.select(itemsAll[i]).classed('track-selected')) {
+                if (!d3.select(this.parentNode).classed('track-selected')) {
                     arcGrow.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
                 }
             })
@@ -759,7 +760,7 @@
             .on('mouseout', function(track, i, itemsAll) {
                 $('#song-detail').removeClass('detail-show')
 
-                if (!d3.select(itemsAll[i]).classed('track-selected')) {
+                if (!d3.select(this.parentNode).classed('track-selected')) {
                     arcShrink.call(this, da, ds, chart.popularityDisk.radius, chart.popularityDisk.marginInner, chart.popularityDisk.marginOuter, track, i)
                 }
             })
