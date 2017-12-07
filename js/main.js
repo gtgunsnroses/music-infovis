@@ -22,21 +22,18 @@
 
     function init() {
         $('#help-btn').on('click', function() {
-            console.log('close!')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
         })
 
         $('#close-btn').on('click', function() {
-            console.log('close!!')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
         })
 
         $('.help-background').on('click', function() {
-            console.log('close!')
             $('#help').toggleClass('help-container--hidden')
             $('#help-btn').toggleClass('help-btn--hidden')
             $('#main-vis').toggleClass('main-vis--blur')
@@ -634,6 +631,8 @@
             .attr('height', '150')
             .attr('clip-path', 'url(#player-art-clip)')
             .attr('xlink:href', './img/player_default@x2.png')
+
+        removeButton()
     }
 
     function updateDetail(chart, tracksAndYear) {
@@ -813,16 +812,19 @@
         if (!track.preview) {
             pause();
             d3
-            .select('.player-art-container')
-            .html('')
-            .append('image')
-            .attr('opacity', '1')
-            .attr('x', '0')
-            .attr('y', '0')
-            .attr('width', '150')
-            .attr('height', '150')
-            .attr('clip-path', 'url(#player-art-clip)')
-            .attr('xlink:href', './img/player_no_track@x2.png')
+                .select('.player-art-container')
+                .html('')
+                .append('image')
+                .attr('opacity', '1')
+                .attr('x', '0')
+                .attr('y', '0')
+                .attr('width', '150')
+                .attr('height', '150')
+                .attr('clip-path', 'url(#player-art-clip)')
+                .attr('xlink:href', './img/player_no_track@x2.png')
+                .attr('class', 'art-error')
+
+            removeButton()
         ;
         }
 
@@ -854,6 +856,13 @@
         $('.art-rotate').removeClass('art-rotate-pause')
         $('.player-art-container').off('click', play)
         $('.player-art-container').on('click', pause)
+    }
+
+    function removeButton() {
+        d3.select('.player-control-play').classed('player-control-visible', true);
+        d3.select('.player-control-pause').classed('player-control-visible', true);
+        $('.player-art-container').off('click', play)
+        $('.player-art-container').off('click', pause)
     }
 
     function pause() {

@@ -865,6 +865,44 @@ body {
   background-color: rgba(250, 165, 165, 0.12);
 }
 
+@keyframes art-bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@keyframes art-shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.art-error {
+  animation: art-shake 0.1s 3;
+  transform-origin: 75px 75px;
+}
+
 @keyframes art-rotate {
   0% {
     transform: rotate(0deg);
@@ -876,6 +914,8 @@ body {
     transform: rotate(360deg);
   }
 }
+
+
 
 .art-rotate {
   transform: rotate(0deg);
