@@ -335,7 +335,6 @@
             .attr('class', 'popularity-filter')
             .attr('stroke', '#b1b1b1')
             .attr('stroke-opacity', '0.2')
-            .attr('fill', '#D9558A')
             .attr('fill-opacity', '0.1')
             .attr('transform', translate(chart.popularityDisk.center.x, chart.popularityDisk.center.y))
         ;
