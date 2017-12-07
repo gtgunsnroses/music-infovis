@@ -39,6 +39,7 @@ body {
   align-items: center;
   color: #b1b1b1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  z-index: 100
 }
 
 .head-nav > div {
@@ -58,8 +59,15 @@ body {
   align-items: center;
 }
 
-.text-container > div {
+.text-container > a {
   margin: 0 20px;
+  color: #b1b1b1;
+  cursor: pointer;
+  text-decoration: none
+}
+
+.text-container > a:hover {
+  color: #FAA5A5
 }
 
 .head-nav .active {
