@@ -225,7 +225,7 @@
                 $('#year-tempo').empty()
                 $('#year-tempo').append(pair.tempo.toFixed(2))
                 $('#year-danceability').empty()
-                $('#year-danceability').append(pair.acousticness.toFixed(2))
+                $('#year-danceability').append(pair.danceability.toFixed(2))
                 $('#year-acousticness').empty()
                 $('#year-acousticness').append(pair.acousticness.toFixed(2))
                 $('#year-loudness').empty()
