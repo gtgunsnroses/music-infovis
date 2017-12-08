@@ -356,14 +356,23 @@
             .attr('class', 'detail-container')
         ;
 
-        svg
+        /*svg
             .append('g')
             .append('image')
             .attr('opacity', '1')
             .attr('x', width - 150)
             .attr('y', height - 150)
             .attr('width', '100')
-            .attr('xlink:href', './img/valence.png')
+            .attr('xlink:href', './img/valence.png')*/
+
+        svg
+            .append('g')
+            .append('image')
+            .attr('opacity', '1')
+            .attr('x', 0.5 * width - 150)
+            .attr('y', 0.94 * height)
+            .attr('width', '300')
+            .attr('xlink:href', './img/valence_bar.png')
 
         d3
             .select('.player-art-container')
